@@ -8,6 +8,8 @@
       div.special-keys-buttons
         button(uib-tooltip='{{ "Power" | translate }}', ng-click='press("power")').btn.btn-danger.btn-xs
           i.fa.fa-power-off
+        button(uib-tooltip='{{ "Unlock" | translate }}', ng-click='press("menu")').btn.btn-primary.btn-xs
+          i.fa.fa-hand-pointer-o
         button(uib-tooltip='{{ "Camera" | translate }}', ng-click='press("camera")').btn.btn-primary.btn-xs
           i.fa.fa-camera
         button(uib-tooltip='{{ "Switch Charset" | translate }}', ng-click='press("switch_charset")').btn.btn-primary.btn-info.btn-xs
