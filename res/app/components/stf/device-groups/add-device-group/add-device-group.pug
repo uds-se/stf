@@ -1,0 +1,30 @@
+.panel.panel-default.stf-add-device-group(ng-show='showAdd')
+  .panel-heading
+    h3.panel-title(translate) Add Device group
+  .panel-body
+    form.form-horizontal.stf-add-device-group.form-device-group(name='devicegroupform', ng-submit='addDeviceGroup(group)')
+
+      .stf-add-device-group.clip-board(ng-show='showClipboard')
+
+      .form-group
+        label.control-label(for='device-group-title')
+          i.fa.fa-object-group.fa-fw
+          span(translate)  Group
+
+        input(id='device-group-title', type='text', name='deviceGroupTitle', ng-model='addForm.title', ng-required='true',
+        text-focus-select, focus-element='focusAddTitle').form-control
+
+      .form-group
+        label.control-label(for='device-group-limit')
+          i.fa.fa-laptop.fa-fw
+          span(translate)  Limit of actively used devices
+
+        input(id='device-group-limit', type='number', name='deviceGroupLimit', min="1", step="1", ng-model='addForm.deviceGroupLimit', ng-required='true',
+        text-focus-select, focus-element='focusAddTitle').form-control
+
+      button.btn.btn-primary-outline.btn-sm.pull-right(type='submit')
+        i.fa.fa-plus.fa-fw
+        span(translate) Add Device Group
+
+
+    error-message(message='{{error}}')

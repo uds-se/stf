@@ -1,0 +1,54 @@
+.widget-container.fluid-height.stf-keys.stf-access-tokens(ng-controller='UserGroupsCtrl')
+  .heading
+    i.fa.fa-users
+    span(translate) User Groups
+
+    button.btn.pull-right.btn-sm(
+    ng-click='showAdd = !showAdd',
+    ng-class='{ "btn-primary-outline": !showAdd, "btn-primary": showAdd }')
+      i.fa.fa-plus.fa-fw
+
+  .widget-content.padded
+
+    nothing-to-show(icon='fa-users', message='{{"No user groups" | translate}}',
+    ng-if='!userGroups.length && !showAdd')
+
+    add-user-group(show-clipboard='true', show-add='showAdd')
+
+    ul.list-group
+      li(style='border-bottom: 1px solid black; margin-bottom: 15px;').list-group-item(ng-repeat='group in userGroups track by $index')
+        a
+          i.fa.fa-key.fa-2x.fa-fw.fa-users
+          .key-list-details
+            .key-list-title(ng-bind='group.title')
+
+          button.btn.btn-xs.btn-danger-outline.pull-right.key-list-remove(ng-click='removeUserGroup(group)')
+            i.fa.fa-trash-o
+            span(translate) Remove
+
+          button.btn.pull-right.btn-sm(
+          ng-click='showAddUserToGroup = !showAddUserToGroup',
+          ng-class='{ "btn-primary-outline": !showAddUserToGroup, "btn-primary": showAddUserToGroup }')
+            i.fa.fa-plus.fa-fw
+            span(translate) Add user
+
+        table(ng-if='group.users.length > 0').table.table-condensed
+          thead
+            tr
+              th(colspan='1')
+                span(translate) Prename
+              th(colspan='3')
+                span(translate) Lastname
+              th(colspan='1')
+          tbody
+            tr(ng-repeat='user in group.users')
+              td
+                span {{user.prename}}
+              td
+                span {{user.lastname}}
+              td
+                button.btn.btn-sm.btn-danger-outline(ng-click='removeUserFromGroup(group, user)')
+                  i.fa.fa-trash-o
+                  span(translate) Remove User
+
+          //add-device-to-group(show-clipboard='true', show-add-device-to-group='showAddUserToGroup', group='group')

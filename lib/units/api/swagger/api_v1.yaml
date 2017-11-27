@@ -24,6 +24,8 @@ tags:
     description: User Operations
   - name: devices
     description: Device Operations
+  - name: groups
+    description: Group Operations
 paths:
   /user:
     x-swagger-router-controller: user
@@ -266,6 +268,56 @@ paths:
         - accessTokenAuth: []
   /swagger.json:
     x-swagger-pipe: swagger_raw
+  /groups/devices:
+        x-swagger-router-controller: groups
+        get:
+          summary: Group List
+          description: The groups endpoint return list of all the device groups
+          operationId: getDeviceGroups
+          tags:
+            - groups
+          parameters:
+            - name: fields
+              in: query
+              description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
+              required: false
+              type: string
+          responses:
+            "200":
+              description: List of Groups
+              schema:
+                $ref: "#/definitions/DeviceListResponse"
+            default:
+              description: Unexpected Error
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+          security:
+            - accessTokenAuth: []
+  /groups/users:
+        x-swagger-router-controller: groups
+        get:
+          summary: Group List
+          description: The groups endpoint return list of all the user groups
+          operationId: getUserGroups
+          tags:
+            - groups
+          parameters:
+            - name: fields
+              in: query
+              description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
+              required: false
+              type: string
+          responses:
+            "200":
+              description: List of Groups
+              schema:
+                $ref: "#/definitions/UserListResponse"
+            default:
+              description: Unexpected Error
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+          security:
+            - accessTokenAuth: []
 definitions:
   UserResponse:
     required:
@@ -289,6 +341,14 @@ definitions:
         type: array
         items:
           type: object
+  UserListResponse:
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            type: object
   DeviceResponse:
     required:
       - device
