@@ -46,6 +46,25 @@ paths:
             $ref: "#/definitions/ErrorResponse"
       security:
         - accessTokenAuth: []
+  /users:
+      x-swagger-router-controller: user
+      get:
+        summary: User List
+        description: The User List endpoint returns all users in the system
+        operationId: getUsers
+        tags:
+          - user
+        responses:
+          "200":
+            description: List of Users
+            schema:
+              $ref: "#/definitions/UserListResponse"
+          default:
+            description: Unexpected Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+        security:
+          - accessTokenAuth: []
   /user/devices:
     x-swagger-router-controller: user
     get:
