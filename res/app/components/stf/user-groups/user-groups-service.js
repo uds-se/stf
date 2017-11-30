@@ -7,9 +7,9 @@ module.exports = function UserGroupsServiceFactory(
   var UserGroupsService = {}
 
   // Array of all devices
-  //$rootScope.devices = []
-  // Dict which maps serial to corresponding device
-  //$rootScope.serialDeviceMap = {}
+  $rootScope.users = []
+  // Dict which maps email to corresponding user
+  $rootScope.emailUserMap = {}
 
   //------------ User groups
 
@@ -18,7 +18,6 @@ module.exports = function UserGroupsServiceFactory(
   }
 
   UserGroupsService.addUserGroup = function(group) {
-    console.log('UserGroupsService.addUserGroup: ' + group.title)
     socket.emit('group.user.group.add', group)
   }
 
@@ -46,17 +45,15 @@ module.exports = function UserGroupsServiceFactory(
   //------------ Users in groups
 
   function loadUsers() {
-    /*
     var xmlHttp = new XMLHttpRequest()
-    xmlHttp.open('GET', '/api/v1/devices/', false) // false for synchronous request
+    xmlHttp.open('GET', '/api/v1/users/', false) // false for synchronous request
     xmlHttp.send(null)
-    $rootScope.devices = angular.fromJson(xmlHttp.responseText).devices
-    // Map serial to device
-    for (var i = 0; i < $rootScope.devices.length; i++) {
-      var device = $rootScope.devices[i]
-      $rootScope.serialDeviceMap[device.serial] = device
+    $rootScope.users = angular.fromJson(xmlHttp.responseText).users
+    // Map email to user
+    for (var i = 0; i < $rootScope.users.length; i++) {
+      var user = $rootScope.users[i]
+      $rootScope.emailUserMap[user.email] = user
     }
-    */
   }
 
   /*
@@ -73,60 +70,51 @@ module.exports = function UserGroupsServiceFactory(
   }
   */
 
-  //UserGroupsService.getDeviceBySerial = function(serial) {
-    //return $rootScope.serialDeviceMap[serial]
-  //}
+  UserGroupsService.getUserByEMail = function(email) {
+    return $rootScope.emailUserMap[email]
+  }
 
-  /*
-  UserGroupsService.getFilteredDevices = function(group) {
-    if (group.deviceSerials.length === 0) {
-      return $rootScope.devices
+  UserGroupsService.getFilteredUsers = function(group) {
+    if (group.userEmails.length === 0) {
+      return $rootScope.users
     }
 
-    // Array of all filtered devices, which can be returned
-    // It is the complement of all devices and the all the devices
+    // Array of all filtered users, which can be returned
+    // It is the complement of all users and the all the users
     // contained inside the group
-    let filteredDevices = []
+    let filteredUsers = []
 
-    for (var i = 0; i < $rootScope.devices.length; i++) {
-      var device = $rootScope.devices[i]
-      if (group.deviceSerials.indexOf(device.serial) === -1) {
-        filteredDevices.push(device)
+    for (var i = 0; i < $rootScope.users.length; i++) {
+      var user = $rootScope.users[i]
+      if (group.userEmails.indexOf(user.email) === -1) {
+        filteredUsers.push(user)
       }
     }
 
-    var filteredDevicesStr = ''
-    for (var l = 0; l < filteredDevices.length; l++) {
-      filteredDevicesStr = filteredDevicesStr.concat(', ' + filteredDevices[l].serial)
-    }
-
-    return filteredDevices
-  }
-  */
-
-  UserGroupsService.addDeviceToGroup = function(group, device) {
-    //socket.emit('group.device.group.device.add', group, device)
+    return filteredUsers
   }
 
-  UserGroupsService.removeDeviceFromGroup = function(group, device) {
-    //socket.emit('group.device.group.device.remove', group, device)
+  UserGroupsService.addUserToGroup = function(group, user) {
+    socket.emit('group.user.group.user.add', group, user)
   }
 
-  /*
-  socket.on('group.device.group.device.added', function(group) {
-    $rootScope.$broadcast('group.device.group.device.updated', group)
+  UserGroupsService.removeUserFromGroup = function(group, user) {
+    socket.emit('group.user.group.user.remove', group, user)
+  }
+
+  socket.on('group.user.group.user.added', function(group) {
+    $rootScope.$broadcast('group.user.group.user.updated', group)
     $rootScope.$apply()
   })
 
-  socket.on('group.device.group.device.removed', function(group) {
-    $rootScope.$broadcast('group.device.group.device.updated', group)
+  socket.on('group.user.group.user.removed', function(group) {
+    $rootScope.$broadcast('group.user.group.user.updated', group)
     $rootScope.$apply()
   })
 
-  socket.on('group.device.group.device.error', function(error) {
-    $rootScope.$broadcast('group.device.group.device.error', error)
+  socket.on('group.user.group.user.error', function(error) {
+    $rootScope.$broadcast('group.user.group.user.error', error)
   })
-  */
 
   // At fist load all users, then return the service
   loadUsers()

@@ -36,19 +36,19 @@
           thead
             tr
               th(colspan='1')
-                span(translate) Prename
+                span(translate) Name
               th(colspan='3')
-                span(translate) Lastname
+                span(translate) EMail
               th(colspan='1')
           tbody
             tr(ng-repeat='user in group.users')
               td
-                span {{user.prename}}
+                span {{user.name}}
               td
-                span {{user.lastname}}
+                span {{user.email}}
               td
                 button.btn.btn-sm.btn-danger-outline(ng-click='removeUserFromGroup(group, user)')
                   i.fa.fa-trash-o
                   span(translate) Remove User
 
-          //add-device-to-group(show-clipboard='true', show-add-device-to-group='showAddUserToGroup', group='group')
+          add-user-to-group(show-clipboard='true', show-add-user-to-group='showAddUserToGroup', group='group')

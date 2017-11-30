@@ -91,11 +91,6 @@ module.exports = function DeviceGroupsServiceFactory(
       }
     }
 
-    var filteredDevicesStr = ''
-    for (var l = 0; l < filteredDevices.length; l++) {
-      filteredDevicesStr = filteredDevicesStr.concat(', ' + filteredDevices[l].serial)
-    }
-
     return filteredDevices
   }
 
