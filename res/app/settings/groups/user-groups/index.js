@@ -1,6 +1,7 @@
 module.exports = angular.module('stf.settings.groups.user-groups', [
   require('stf/common-ui/nice-tabs').name,
   require('stf/user-groups/add-user-group').name,
+  require('stf/user-groups/add-user-to-group').name,
 ])
   .run(['$templateCache', function($templateCache) {
     $templateCache.put(

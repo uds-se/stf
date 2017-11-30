@@ -10,7 +10,7 @@
     ul.list-group
       li.list-group-item(ng-repeat='device in filteredDevices[group.title] track by $index')
         a
-          i.fa.fa-key.fa-2x.fa-fw.fa-mobile
+          i.fa.fa-mobile.fa-fw
           .key-list-details
             .key-list-title(ng-bind='device.model + ", " + device.name')
 

@@ -10,18 +10,17 @@ module.exports = function UserGroupsCtrl($scope, UserGroupsService) {
         for (var g = 0; g < $scope.userGroups.length; g++) {
           var group = $scope.userGroups[g]
           group.users = []
-          // TODO
-          //for (var d = 0; d < group.deviceSerials.length; d++) {
-          //  var deviceSerial = group.deviceSerials[d]
-          //  insertDeviceBySerial(deviceSerial, group)
-          //}
+          for (var d = 0; d < group.userEmails.length; d++) {
+            var email = group.userEmails[d]
+            insertDeviceBySerial(email, group)
+          }
         }
       })
   }
 
-  function insertDeviceBySerial(deviceSerial, group) {
-    //let device = DeviceGroupsService.getDeviceBySerial(deviceSerial)
-    //group.devices.push(device)
+  function insertDeviceBySerial(email, group) {
+    let user = UserGroupsService.getUserByEMail(email)
+    group.users.push(user)
   }
 
   $scope.removeUserGroup = function(group) {
