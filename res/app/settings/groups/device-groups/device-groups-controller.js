@@ -31,6 +31,10 @@ module.exports = function DeviceGroupsCtrl($scope, DeviceGroupsService) {
     DeviceGroupsService.removeDeviceFromGroup(group, device)
   }
 
+  $scope.removeUserGroupFromGroup = function(group, device) {
+    //DeviceGroupsService.removeDeviceFromGroup(group, device)
+  }
+
   $scope.$on('group.device.group.updated', updateDeviceGroups)
   $scope.$on('group.device.group.device.updated', updateDeviceGroups)
 

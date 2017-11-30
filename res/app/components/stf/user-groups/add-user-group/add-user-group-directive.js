@@ -10,6 +10,7 @@ module.exports = function addUserGroupDirective(UserGroupsService) {
     controller: function($scope, UserGroupsService) {
       $scope.addForm = {
         title: ''
+        , deviceGroupLimit: ''
       }
 
       $scope.$on('group.user.group.error', function(event, error) {
@@ -26,11 +27,13 @@ module.exports = function addUserGroupDirective(UserGroupsService) {
       $scope.addUserGroup = function() {
         UserGroupsService.addUserGroup({
           title: $scope.addForm.title
+          , limitOfActivelyUsedDevices: $scope.addForm.deviceGroupLimit
         })
       }
 
       $scope.closeAddUserGroup = function() {
         $scope.addForm.title = ''
+        $scope.addForm.deviceGroupLimit = ''
         // TODO: cannot access to the form by name inside a directive?
         $scope.showAdd = false
         $scope.error = ''
