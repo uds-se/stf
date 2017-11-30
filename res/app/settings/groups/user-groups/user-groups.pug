@@ -20,7 +20,7 @@
         a
           i.fa.fa-key.fa-2x.fa-fw.fa-users
           .key-list-details
-            .key-list-title(ng-bind='group.title')
+            .key-list-title(ng-bind='group.title + "(Limit of actively used devices: " + group.limitOfActivelyUsedDevices + ")"')
 
           button.btn.btn-xs.btn-danger-outline.pull-right.key-list-remove(ng-click='removeUserGroup(group)')
             i.fa.fa-trash-o
