@@ -51,7 +51,7 @@
               td
                 button.btn.btn-sm.btn-danger-outline(ng-click='removeUserGroupFromGroup(group, userGroupTitle)')
                   i.fa.fa-trash-o
-                  span(translate) Remove User group
+                  span(translate) Remove user group
 
         table(ng-if='group.deviceSerials.length > 0').table.table-condensed
           thead
@@ -74,7 +74,7 @@
               td
                 button.btn.btn-sm.btn-danger-outline(ng-click='removeDeviceFromGroup(group, device)')
                   i.fa.fa-trash-o
-                  span(translate) Remove Device
+                  span(translate) Remove device
 
           add-device-to-group(show-clipboard='true', show-add-device-to-group='showAddDeviceToGroup', group='group')
           add-user-group-to-group(show-clipboard='true', show-add-user-group-to-group='showAddUserGroupToGroup', group='group')
