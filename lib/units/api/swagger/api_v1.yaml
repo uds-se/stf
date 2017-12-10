@@ -70,7 +70,7 @@ paths:
     get:
       summary: User Devices
       description: The User Devices endpoint returns device list owner by current authorized user
-      operationId: getUserDevices
+      operationId: getUserDevicesFilteredByGroupMembership
       tags:
         - user
       parameters:
