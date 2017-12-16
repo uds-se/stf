@@ -165,7 +165,11 @@ module.exports = function DeviceServiceFactory($http, socket, EnhanceDeviceServi
     , digest: false
     })
 
-    oboe('/api/v1/devices')
+    // Originally the path was '/api/v1/devices',
+    // but we decided to only allow the user assigned
+    // devices, therefore no general tracking of all
+    // devices is allowed
+    oboe('/api/v1/user/devices')
       .node('devices[*]', function(device) {
         tracker.add(device)
       })
