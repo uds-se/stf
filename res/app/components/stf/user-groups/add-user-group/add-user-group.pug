@@ -1,0 +1,29 @@
+.panel.panel-default.stf-add-user-group(ng-show='showAdd')
+  .panel-heading
+    h3.panel-title(translate) Add user group
+  .panel-body
+    form.form-horizontal.stf-add-user-group.form-user-group(name='usergroupform', ng-submit='addUserGroup(group)')
+
+      .stf-add-user-group.clip-board(ng-show='showClipboard')
+
+      .form-group
+        label.control-label(for='user-group-title')
+          i.fa.fa-users.fa-fw
+          span(translate)  Group
+
+        input(id='user-group-title', type='text', name='userGroupTitle', ng-model='addForm.title', ng-required='true',
+        text-focus-select, focus-element='focusAddTitle').form-control
+
+      .form-group
+        label.control-label(for='user-group-device-limit')
+          i.fa.fa-laptop.fa-fw
+          span(translate)  Limit of actively used devices
+
+        input(id='user-group-device-limit', type='number', name='deviceGroupLimit', min="1", step="1", ng-model='addForm.deviceGroupLimit', ng-required='true',
+        text-focus-select, focus-element='focusAddTitle').form-control
+
+      button.btn.btn-primary-outline.btn-sm.pull-right(type='submit')
+        i.fa.fa-plus.fa-fw
+        span(translate) Add user group
+
+    error-message(message='{{error}}')

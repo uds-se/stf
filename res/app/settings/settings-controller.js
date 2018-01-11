@@ -1,4 +1,4 @@
-module.exports = function SettingsCtrl($scope, gettext) {
+module.exports = function SettingsCtrl($scope, $rootScope, gettext) {
 
   $scope.settingTabs = [
     {
@@ -12,4 +12,15 @@ module.exports = function SettingsCtrl($scope, gettext) {
       templateUrl: 'settings/keys/keys.pug'
     }
   ]
+
+  if ($rootScope.adminMode) {
+    var groupsTab = {
+      title: gettext('Groups'),
+      icon: 'fa-object-group fa-fw',
+      templateUrl: 'settings/groups/groups.pug'
+    }
+
+    $scope.settingTabs.push(groupsTab)
+  }
+
 }

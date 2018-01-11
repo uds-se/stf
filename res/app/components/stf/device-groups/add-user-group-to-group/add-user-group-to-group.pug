@@ -1,0 +1,20 @@
+.panel.panel-default.stf-add-device-to-group(ng-show='showAddUserGroupToGroup')
+  .panel-heading
+    h3.panel-title(translate) Associate user group with device group
+  .panel-body
+    .stf-add-device-group.clip-board(ng-show='showClipboard')
+
+    nothing-to-show(icon='fa-object-group', message='{{"No user groups available to add" | translate}}',
+    ng-if='filteredUserGroups[group.title].length <= 0')
+
+    ul.list-group
+      li.list-group-item(ng-repeat='ugroup in filteredUserGroups[group.title] track by $index')
+        a
+          i.fa.fa-mobile.fa-fw
+          .key-list-details
+            .key-list-title(ng-bind='ugroup.title')
+
+          button.btn.btn-primary-outline.btn-sm(type='submit', ng-click='addUserGroupToGroup(ugroup)')
+            i.fa.fa-plus.fa-fw
+
+    error-message(message='{{error}}')

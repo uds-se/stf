@@ -24,6 +24,8 @@ tags:
     description: User Operations
   - name: devices
     description: Device Operations
+  - name: groups
+    description: Group Operations
 paths:
   /user:
     x-swagger-router-controller: user
@@ -44,12 +46,69 @@ paths:
             $ref: "#/definitions/ErrorResponse"
       security:
         - accessTokenAuth: []
+  /user/isadmin:
+      x-swagger-router-controller: user
+      get:
+        summary: User Profile
+        description: The IsAdmin endpoint returns information about whether the current authorized user is an admin
+        operationId: isUserAdmin
+        tags:
+          - user
+        responses:
+          "200":
+            description: Boolean value if current user is admin
+            schema:
+              $ref: "#/definitions/UserResponse"
+          default:
+            description: Unexpected Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+        security:
+          - accessTokenAuth: []
+  /user/isUserAllowedToUseAdditionalDevice:
+        x-swagger-router-controller: user
+        get:
+          summary: User Profile
+          description: The isUserAllowedToUseAdditionalDevice endpoint returns information about whether the current authorized user is allowed to use another device
+          operationId: isUserAllowedToUseAdditionalDevice
+          tags:
+            - user
+          responses:
+            "200":
+              description: Boolean value if current user is allowed to use another device
+              schema:
+                $ref: "#/definitions/UserResponse"
+            default:
+              description: Unexpected Error
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+          security:
+            - accessTokenAuth: []
+  /users:
+      x-swagger-router-controller: user
+      get:
+        summary: User List
+        description: The User List endpoint returns all users in the system
+        operationId: getUsers
+        tags:
+          - user
+        responses:
+          "200":
+            description: List of Users
+            schema:
+              $ref: "#/definitions/UserListResponse"
+          default:
+            description: Unexpected Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+        security:
+          - accessTokenAuth: []
   /user/devices:
     x-swagger-router-controller: user
     get:
       summary: User Devices
       description: The User Devices endpoint returns device list owner by current authorized user
-      operationId: getUserDevices
+      operationId: getUserDevicesFilteredByGroupMembership
       tags:
         - user
       parameters:
@@ -266,6 +325,56 @@ paths:
         - accessTokenAuth: []
   /swagger.json:
     x-swagger-pipe: swagger_raw
+  /groups/devices:
+        x-swagger-router-controller: groups
+        get:
+          summary: Group List
+          description: The groups endpoint return list of all the device groups
+          operationId: getDeviceGroups
+          tags:
+            - groups
+          parameters:
+            - name: fields
+              in: query
+              description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
+              required: false
+              type: string
+          responses:
+            "200":
+              description: List of Groups
+              schema:
+                $ref: "#/definitions/DeviceListResponse"
+            default:
+              description: Unexpected Error
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+          security:
+            - accessTokenAuth: []
+  /groups/users:
+        x-swagger-router-controller: groups
+        get:
+          summary: Group List
+          description: The groups endpoint return list of all the user groups
+          operationId: getUserGroups
+          tags:
+            - groups
+          parameters:
+            - name: fields
+              in: query
+              description: Fields query parameter takes a comma seperated list of fields. Only listed field will be return in response
+              required: false
+              type: string
+          responses:
+            "200":
+              description: List of Groups
+              schema:
+                $ref: "#/definitions/UserListResponse"
+            default:
+              description: Unexpected Error
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+          security:
+            - accessTokenAuth: []
 definitions:
   UserResponse:
     required:
@@ -289,6 +398,14 @@ definitions:
         type: array
         items:
           type: object
+  UserListResponse:
+      required:
+        - users
+      properties:
+        users:
+          type: array
+          items:
+            type: object
   DeviceResponse:
     required:
       - device
