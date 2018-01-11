@@ -24,15 +24,21 @@ module.exports = function DeviceGroupsCtrl($scope, DeviceGroupsService) {
   }
 
   $scope.removeDeviceGroup = function(group) {
-    DeviceGroupsService.removeDeviceGroup(group)
+    if (confirm('Do you want to remove the device group?')) {
+      DeviceGroupsService.removeDeviceGroup(group)
+    }
   }
 
   $scope.removeDeviceFromGroup = function(group, device) {
-    DeviceGroupsService.removeDeviceFromGroup(group, device)
+    if (confirm('Do you want to remove the device from the group?')) {
+      DeviceGroupsService.removeDeviceFromGroup(group, device)
+    }
   }
 
   $scope.removeUserGroupFromGroup = function(group, userGroupTitle) {
-    DeviceGroupsService.removeAssociatedUserGroupFromGroup(group, userGroupTitle)
+    if (confirm('Do you want to remove the user group from the device group?')) {
+      DeviceGroupsService.removeAssociatedUserGroupFromGroup(group, userGroupTitle)
+    }
   }
 
   $scope.$on('group.device.group.updated', updateDeviceGroups)

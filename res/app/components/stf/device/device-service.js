@@ -2,8 +2,9 @@ var oboe = require('oboe')
 var _ = require('lodash')
 var EventEmitter = require('eventemitter3')
 
-module.exports = function DeviceServiceFactory($http, socket, EnhanceDeviceService) {
+module.exports = function DeviceServiceFactory($rootScope, $http, socket, EnhanceDeviceService) {
   var deviceService = {}
+  var allowedDevices = new Set()
 
   function Tracker($scope, options) {
     var devices = []
@@ -72,9 +73,11 @@ module.exports = function DeviceServiceFactory($http, socket, EnhanceDeviceServi
     }
 
     var insert = function insert(data) {
-      devicesBySerial[data.serial] = devices.push(data) - 1
-      sync(data)
-      this.emit('add', data)
+      if ($rootScope.adminMode || allowedDevices.has(data.serial)) {
+        devicesBySerial[data.serial] = devices.push(data) - 1
+        sync(data)
+        this.emit('add', data);
+      }
     }.bind(this)
 
     var modify = function modify(data, newData) {
@@ -109,15 +112,19 @@ module.exports = function DeviceServiceFactory($http, socket, EnhanceDeviceServi
     }
 
     function addListener(event) {
-      var device = get(event.data)
-      if (device) {
-        modify(device, event.data)
-        notify(event)
-      }
-      else {
-        if (options.filter(event.data)) {
-          insert(event.data)
+      // Only add newly connected devices, if you are an admin,
+      // instead only display assigned devices
+      if ($rootScope.adminMode || allowedDevices.has(event.data.serial)) {
+        var device = get(event.data)
+        if (device) {
+          modify(device, event.data)
           notify(event)
+        }
+        else {
+          if (options.filter(event.data)) {
+            insert(event.data)
+            notify(event)
+          }
         }
       }
     }
@@ -133,10 +140,12 @@ module.exports = function DeviceServiceFactory($http, socket, EnhanceDeviceServi
       }
       else {
         if (options.filter(event.data)) {
-          insert(event.data)
-          // We've only got partial data
-          fetch(event.data)
-          notify(event)
+          if ($rootScope.adminMode || allowedDevices.has(event.data.serial)) {
+            insert(event.data)
+            // We've only got partial data
+            fetch(event.data)
+            notify(event)
+          }
         }
       }
     }
@@ -171,6 +180,7 @@ module.exports = function DeviceServiceFactory($http, socket, EnhanceDeviceServi
     // devices is allowed
     oboe('/api/v1/user/devices')
       .node('devices[*]', function(device) {
+        allowedDevices.add(device.serial)
         tracker.add(device)
       })
 

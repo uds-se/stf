@@ -4,6 +4,7 @@ module.exports = function DeviceListDetailsDirective(
   $filter
 , $compile
 , $rootScope
+, $http
 , gettext
 , DeviceColumnService
 , GroupService
@@ -68,6 +69,16 @@ module.exports = function DeviceListDetailsDirective(
           else if (device.using) {
             kickDevice(device)
             e.preventDefault()
+          }
+          else if (!device.using) {
+            var xmlHttp = new XMLHttpRequest()
+            xmlHttp.open('GET', '/api/v1/user/isUserAllowedToUseAdditionalDevice/', false) // false for synchronous request
+            xmlHttp.send(null)
+            let isAllowed = angular.fromJson(xmlHttp.responseText).isAllowed
+            console.log('isAllowed : ' + isAllowed)
+            if (!isAllowed) {
+              e.preventDefault()
+            }
           }
         }
       }

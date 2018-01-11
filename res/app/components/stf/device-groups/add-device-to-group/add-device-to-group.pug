@@ -12,7 +12,7 @@
         a
           i.fa.fa-mobile.fa-fw
           .key-list-details
-            .key-list-title(ng-bind='device.model + ", " + device.name')
+            .key-list-title(ng-bind='device.model + ", " + device.version + ", " + device.serial')
 
           button.btn.btn-primary-outline.btn-sm(type='submit', ng-click='addDeviceToGroup(device)')
             i.fa.fa-plus.fa-fw

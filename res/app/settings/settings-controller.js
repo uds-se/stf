@@ -13,9 +13,6 @@ module.exports = function SettingsCtrl($scope, $rootScope, gettext) {
     }
   ]
 
-  $rootScope.adminMode = true
-  console.log("You are: " + $rootScope.adminMode)
-
   if ($rootScope.adminMode) {
     var groupsTab = {
       title: gettext('Groups'),

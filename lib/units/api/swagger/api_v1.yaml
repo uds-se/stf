@@ -46,6 +46,44 @@ paths:
             $ref: "#/definitions/ErrorResponse"
       security:
         - accessTokenAuth: []
+  /user/isadmin:
+      x-swagger-router-controller: user
+      get:
+        summary: User Profile
+        description: The IsAdmin endpoint returns information about whether the current authorized user is an admin
+        operationId: isUserAdmin
+        tags:
+          - user
+        responses:
+          "200":
+            description: Boolean value if current user is admin
+            schema:
+              $ref: "#/definitions/UserResponse"
+          default:
+            description: Unexpected Error
+            schema:
+              $ref: "#/definitions/ErrorResponse"
+        security:
+          - accessTokenAuth: []
+  /user/isUserAllowedToUseAdditionalDevice:
+        x-swagger-router-controller: user
+        get:
+          summary: User Profile
+          description: The isUserAllowedToUseAdditionalDevice endpoint returns information about whether the current authorized user is allowed to use another device
+          operationId: isUserAllowedToUseAdditionalDevice
+          tags:
+            - user
+          responses:
+            "200":
+              description: Boolean value if current user is allowed to use another device
+              schema:
+                $ref: "#/definitions/UserResponse"
+            default:
+              description: Unexpected Error
+              schema:
+                $ref: "#/definitions/ErrorResponse"
+          security:
+            - accessTokenAuth: []
   /users:
       x-swagger-router-controller: user
       get:
