@@ -4,8 +4,13 @@ module.exports = function CommandExecutorServiceFactory(
 ) {
   var CommandExecutorService = {}
 
-  CommandExecutorService.executeGradleCommand = function(params) {
-    socket.emit('command.execute', params)
+  // Depricated
+  CommandExecutorService.executeDroidMateByGradle = function(params) {
+    socket.emit('command.execute.droidmate.gradle', params)
+  }
+
+  CommandExecutorService.executeDroidMate = function(params) {
+    socket.emit('command.execute.droidmate.jar', params)
   }
 
   socket.on('command.reply', function(reply) {

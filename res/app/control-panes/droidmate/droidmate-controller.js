@@ -160,7 +160,7 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
       false))
 
     var params = parameterBuilder.toString()
-    CommandExecutorService.executeGradleCommand(params)
+    CommandExecutorService.executeDroidMate(params)
     parameterBuilder.clear()
     apkDir = null
   }
