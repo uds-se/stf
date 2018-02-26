@@ -1,0 +1,26 @@
+module.exports = function CommandExecutorServiceFactory(
+  $rootScope
+  , socket
+) {
+  var CommandExecutorService = {}
+
+  // Depricated
+  CommandExecutorService.executeDroidMateByGradle = function(params) {
+    socket.emit('command.execute.droidmate.gradle', params)
+  }
+
+  CommandExecutorService.executeDroidMate = function(params) {
+    socket.emit('command.execute.droidmate.jar', params)
+  }
+
+  socket.on('command.reply', function(reply) {
+    $rootScope.$broadcast('command.reply', reply)
+    $rootScope.$apply()
+  })
+
+  socket.on('command.error', function(error) {
+    $rootScope.$broadcast('command.error', error)
+  })
+
+  return CommandExecutorService
+}
