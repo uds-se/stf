@@ -9,8 +9,8 @@ module.exports = function CommandExecutorServiceFactory(
     socket.emit('command.execute.droidmate.gradle', params)
   }
 
-  CommandExecutorService.executeDroidMate = function(params) {
-    socket.emit('command.execute.droidmate.jar', params)
+  CommandExecutorService.executeDroidMate = function(params, outputDir) {
+    socket.emit('command.execute.droidmate.jar', params, outputDir)
   }
 
   socket.on('command.reply', function(reply) {

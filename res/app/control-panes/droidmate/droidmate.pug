@@ -275,7 +275,11 @@
     button(ng-click='test()', ng-disabled='checkTestButton()').btn.btn-sm.btn-success
       i.fa.fa-android
       span(translate) Run Test
+  .widget-content.padded
+    button(ng-click='downloadTestResults()', ng-show='result').btn.btn-sm.btn-success
+      i.fa.fa-archive
+      span(translate) Download test results
   pre.shell-results.selectable(ng-show='result') {{result}}
-  pre.shell-results.selectable.shell-results-empty(ng-show='!result') No output
+  pre.shell-results.selectable.shell-results-empty(ng-show='!result') Test output will be displayed here
 
   error-message(message='{{error}}')

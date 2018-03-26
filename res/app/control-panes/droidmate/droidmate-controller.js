@@ -70,7 +70,9 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
 
   $scope.result = null
   let parameterBuilder = new ParameterBuilder()
+  let id = null
   let apkDir = null
+  let outputDir = null
 
   $scope.test = function() {
     $scope.result = null
@@ -159,36 +161,17 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
       $scope.device.serial,
       false))
 
+    outputDir = apkDir.endsWith('/') ? apkDir + 'output/' : apkDir + '/output/'
+    // DroidMate should store all the output here
+    parameterBuilder.addParameter(new ParameterMandatory('outputDir',
+      outputDir,
+      false))
+
     var params = parameterBuilder.toString()
-    CommandExecutorService.executeDroidMate(params)
+    CommandExecutorService.executeDroidMate(params, outputDir)
     parameterBuilder.clear()
     apkDir = null
-  }
-
-  $scope.uploadFile = function($files) {
-    if ($files.length) {
-      $scope.upload = {state: 'uploading'}
-      $scope.upload.progress = 0
-      return StorageService.storeFile('apk', $files, {
-        filter: function(file) {
-          return /\.apk$/i.test(file.name)
-        }
-      }, true)
-        .progressed(function(e) {
-          if (e.lengthComputable) {
-            $scope.upload.progress = e.loaded / e.total * 100 / 2
-          }
-        })
-        .then(function(res) {
-          apkDir = res.data.resources.file.path
-          $scope.upload.progress = 100
-          $scope.upload.state = 'installed'
-          $scope.upload.settled = true
-        })
-        .catch(function(err) {
-          $scope.upload.error = err.code || err.message
-        })
-    }
+    outputDir = null
   }
 
   function setup() {
@@ -210,6 +193,37 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     $scope.takeScreenshotsCB = false
   }
 
+  $scope.uploadFile = function($files) {
+    if ($files.length) {
+      $scope.upload = {state: 'uploading'}
+      $scope.upload.progress = 0
+      return StorageService.storeFile('apk', $files, {
+        filter: function(file) {
+          return /\.apk$/i.test(file.name)
+        }
+      }, true)
+        .progressed(function(e) {
+          if (e.lengthComputable) {
+            $scope.upload.progress = e.loaded / e.total * 100 / 2
+          }
+        })
+        .then(function(res) {
+          id = res.data.resources.file.id
+          apkDir = res.data.resources.file.path
+          $scope.upload.progress = 100
+          $scope.upload.state = 'installed'
+          $scope.upload.settled = true
+        })
+        .catch(function(err) {
+          $scope.upload.error = err.code || err.message
+        })
+    }
+  }
+
+  $scope.downloadTestResults = function() {
+    location.href = '/s/download/report/' + id + '?download'
+  }
+
   $scope.$on('command.reply', function(event, reply) {
     $scope.result = reply
   })
@@ -220,13 +234,13 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     })
   })
 
-  // TODO check if a command is still executed
   $scope.checkTestButton = function() {
     return typeof $scope.actionsLimit === 'undefined'
       || typeof $scope.timeLimit === 'undefined'
       || typeof $scope.randomSeed === 'undefined'
       || typeof $scope.upload === 'undefined'
       || $scope.upload.settled !== true
+      || $scope.device === null
       || apkDir === null
   }
 
