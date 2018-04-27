@@ -11,9 +11,9 @@ class Parameter {
 
   toString() {
     if (this.flag) {
-      return '-' + this.parameterName
+      return '--' + this.parameterName
     } else {
-      return '-' + this.parameterName + ' ' + this.parameterValue
+      return '--' + this.parameterName + ' ' + this.parameterValue
     }
   }
 
@@ -84,105 +84,112 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
   let outputDir = null
 
   /**
-   * We have to treat timeLimit and actionsLimit special. If more conditions in future
+   * We have to treat timeLimit and actionLimit special. If more conditions in future
    * are needed, we have to think of a better condition handling inside the parameter
    * classes. For now I think it's okay.
    */
   $scope.test = function() {
     $scope.result = null
-    // Mandatory parameters
-    parameterBuilder.addParameter(new ParameterMandatory('apksDir', apkDir, false))
-    parameterBuilder.addParameter(new ParameterMandatory('randomSeed', $scope.randomSeed, false))
-    parameterBuilder.addParameter(new ParameterMandatory('takeScreenshots', $scope.takeScreenshotsCB, true))
-    // Special parameters: One of the following parameters is required: actionsLimit, timeLimit.
-    parameterBuilder.addParameter(new ParameterOptional('timeLimit',
+    // Special parameters: One of the following parameters is required: actionLimit, timeLimit.
+    parameterBuilder.addParameter(new ParameterOptional('Selectors-timeLimit',
       $scope.timeLimit,
       false))
-    parameterBuilder.addParameter(new ParameterOptional('actionsLimit',
-      $scope.actionsLimit,
+    parameterBuilder.addParameter(new ParameterOptional('Selectors-actionLimit',
+      $scope.actionLimit,
       false))
-    // Optional parameters
+    // Mandatory parameters
+    parameterBuilder.addParameter(new ParameterMandatory('Exploration-apksDir', apkDir, false))
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-randomSeed', $scope.randomSeed, false))
+    // TODO ask if not needed anymore
+    // parameterBuilder.addParameter(new ParameterMandatory('takeScreenshots', $scope.takeScreenshotsCB, true))
+    // All the following are pptional parameters
     // UI Automator
-    parameterBuilder.addParameter(new ParameterOptional('uiautomatorDaemonServerStartTimeout',
+    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-startTimeout',
       $scope.uiautomatorDaemonServerStartTimeout,
       false,
       $scope.uiautomatorDaemonServerStartTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('uiautomatorDaemonServerStartQueryDelay',
+    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-startQueryDelay',
       $scope.uiautomatorDaemonServerStartQueryDelay,
       false,
       $scope.uiautomatorDaemonServerStartQueryDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('uiautomatorDaemonSocketTimeout',
+    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-socketTimeout',
       $scope.uiautomatorDaemonSocketTimeout,
       false,
       $scope.uiautomatorDaemonSocketTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('waitForWindowUpdateTimeout',
+    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-waitForWindowUpdateTimeout',
       $scope.waitForWindowUpdateTimeout,
       false,
       $scope.waitForWindowUpdateTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('waitForGuiToStabilize',
-      $scope.waitForGuiToStabilizeCB,
-      true))
+    // TODO needed?
+    // parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-waitForGuiToStabilize',
+    //   $scope.waitForGuiToStabilizeCB,
+    //   true))
     // Monitor
-    parameterBuilder.addParameter(new ParameterOptional('monitorSocketTimeout',
+    parameterBuilder.addParameter(new ParameterOptional('ApiMonitorServer-monitorSocketTimeout',
       $scope.monitorSocketTimeout,
       false,
       $scope.monitorSocketTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('monitorUseLogcat',
+    parameterBuilder.addParameter(new ParameterOptional('ApiMonitorServer-monitorUseLogcat',
       $scope.monitorUseLogcatCB,
       true))
-    // Advanced configuration
-    parameterBuilder.addParameter(new ParameterOptional('checkDeviceAvailableAfterRebootAttempts',
+    // DeviceCommunication
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkDeviceAvailableAfterRebootAttempts',
       $scope.checkDeviceAvailableAfterRebootAttempts,
       false,
       $scope.checkDeviceAvailableAfterRebootAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('checkDeviceAvailableAfterRebootFirstDelay',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay',
       $scope.checkDeviceAvailableAfterRebootFirstDelay,
       false,
       $scope.checkDeviceAvailableAfterRebootFirstDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('checkDeviceAvailableAfterRebootLaterDelays',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays',
       $scope.checkDeviceAvailableAfterRebootLaterDelays,
       false,
       $scope.checkDeviceAvailableAfterRebootLaterDelaysCB))
-    parameterBuilder.addParameter(new ParameterOptional('clearPackageRetryAttempts',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-clearPackageRetryAttempts',
       $scope.clearPackageRetryAttempts,
       false,
       $scope.clearPackageRetryAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('clearPackageRetryDelay',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-clearPackageRetryDelay',
       $scope.clearPackageRetryDelay,
       false,
       $scope.clearPackageRetryDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('closeANRAttempts',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-closeANRAttempts',
       $scope.closeANRAttempts,
       false,
       $scope.closeANRAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('closeANRDelay',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-closeANRDelay',
       $scope.closeANRDelay,
       false,
       $scope.closeANRDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('alwaysClickFirstWidget',
-      $scope.alwaysClickFirstWidgetCB,
-      true))
-    parameterBuilder.addParameter(new ParameterOptional('checkAppIsRunningRetryAttempts',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkAppIsRunningRetryAttempts',
       $scope.checkAppIsRunningRetryAttemptsCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('checkAppIsRunningRetryDelay',
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkAppIsRunningRetryDelay',
       $scope.checkAppIsRunningRetryDelayCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('deployRawApks',
+    // Deploy
+    parameterBuilder.addParameter(new ParameterOptional('Deploy-deployRawApks',
       $scope.deployRawApksCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('report',
-      $scope.reportCB,
-      true))
+
+    // TODO ask if not needed anymore
+    // parameterBuilder.addParameter(new ParameterOptional('alwaysClickFirstWidget',
+    //   $scope.alwaysClickFirstWidgetCB,
+    //   true))
+    // TODO ask if not needed anymore
+    // parameterBuilder.addParameter(new ParameterOptional('report',
+    //   $scope.reportCB,
+    //   true))
 
     // Additionally append the device serial number as parameter, it is not in the interface
-    parameterBuilder.addParameter(new ParameterMandatory('deviceSN',
+    parameterBuilder.addParameter(new ParameterMandatory('Exploration-deviceSerialNumber',
       $scope.device.serial,
       false))
 
+    // TODO put the outputDir into the backend
     outputDir = apkDir.endsWith('/') ? apkDir + 'output/' : apkDir + '/output/'
     // DroidMate should store all the output here
-    parameterBuilder.addParameter(new ParameterMandatory('outputDir',
+    parameterBuilder.addParameter(new ParameterMandatory('Output-droidmateOutputDirPath',
       outputDir,
       false))
 
@@ -194,7 +201,7 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
   }
 
   function setup() {
-    $scope.actionsLimit = 10
+    $scope.actionLimit = 10
     $scope.alwaysClickFirstWidgetCB = false
     $scope.checkAppIsRunningRetryAttempts = 2
     $scope.checkAppIsRunningRetryDelay = 5 * 1000 // ms
@@ -254,11 +261,11 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
   })
 
   /**
-   * One of the following parameters is required: actionsLimit, timeLimit.
+   * One of the following parameters is required: actionLimit, timeLimit.
    */
   $scope.checkTestButton = function() {
-    return ((typeof $scope.actionsLimit === 'undefined' || $scope.actionsLimit == null)
-                && (typeof $scope.timeLimit === 'undefined' || $scope.timeLimit == null))
+    return ((typeof $scope.actionLimit === 'undefined' || $scope.actionLimit === null)
+                && (typeof $scope.timeLimit === 'undefined' || $scope.timeLimit === null))
       || typeof $scope.randomSeed === 'undefined'
       || typeof $scope.upload === 'undefined'
       || $scope.upload.settled !== true
