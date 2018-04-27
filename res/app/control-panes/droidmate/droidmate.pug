@@ -24,7 +24,7 @@
           td
             input(type='number', name='actionsLimit', min="1", step="1", ng-model='actionsLimit', style='width:10em')
           td
-            span How many actions the GUI exploration strategy can conduct before terminating.
+            span How many actions the GUI exploration strategy can conduct before terminating. One of the following parameters is required: actionsLimit, timeLimit.
         // timeLimit
         tr
           td
@@ -34,7 +34,7 @@
           td
             input(type='number', name='timeLimit', min="1", step="1", ng-model='timeLimit', style='width:10em')
           td
-            span How long the exploration of any given apk should take, in seconds. If set to 0, instead actionsLimit will be used.
+            span How long the exploration of any given apk should take, in seconds. If set to 0, instead actionsLimit will be used. One of the following parameters is required: actionsLimit, timeLimit.
         // randomSeed
         tr
           td
@@ -42,7 +42,7 @@
           td
             span randomSeed
           td
-            input(type='number', name='randomSeed', min="1", step="1", ng-model='randomSeed', style='width:10em')
+            input(type='number', name='randomSeed', min="-1", step="1", ng-model='randomSeed', style='width:10em')
           td
             span The seed for a random generator used by a random-clicking GUI exploration strategy. If null, a seed will be randomized.
         // takeScreenshots

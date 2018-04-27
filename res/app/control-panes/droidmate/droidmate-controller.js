@@ -19,6 +19,9 @@ class Parameter {
 
 }
 
+/**
+ * ParameterMandatory
+ */
 class ParameterMandatory extends Parameter {
   constructor(parameterName, parameterValue, flag) {
     super(parameterName, parameterValue, flag)
@@ -29,6 +32,9 @@ class ParameterMandatory extends Parameter {
   }
 }
 
+/**
+ * ParameterOptional
+ */
 class ParameterOptional extends Parameter {
   constructor(parameterName, parameterValue, flag, optionalCheckbox) {
     super(parameterName, parameterValue, flag)
@@ -37,10 +43,13 @@ class ParameterOptional extends Parameter {
 
   isParameterUsed() {
     return (typeof this.optionalCheckbox !== 'undefined' && this.optionalCheckbox === true)
-      || (typeof this.parameterValue !== 'undefined' && this.parameterValue !== false)
+      || (typeof this.parameterValue !== 'undefined' && this.parameterValue !== null && this.parameterValue !== false)
   }
 }
 
+/**
+ * ParameterBuilder
+ */
 class ParameterBuilder {
   constructor() {
     this.parameters = []
@@ -74,14 +83,24 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
   let apkDir = null
   let outputDir = null
 
+  /**
+   * We have to treat timeLimit and actionsLimit special. If more conditions in future
+   * are needed, we have to think of a better condition handling inside the parameter
+   * classes. For now I think it's okay.
+   */
   $scope.test = function() {
     $scope.result = null
     // Mandatory parameters
     parameterBuilder.addParameter(new ParameterMandatory('apksDir', apkDir, false))
-    parameterBuilder.addParameter(new ParameterMandatory('actionsLimit', $scope.actionsLimit, false))
-    parameterBuilder.addParameter(new ParameterMandatory('timeLimit', $scope.timeLimit, false))
     parameterBuilder.addParameter(new ParameterMandatory('randomSeed', $scope.randomSeed, false))
     parameterBuilder.addParameter(new ParameterMandatory('takeScreenshots', $scope.takeScreenshotsCB, true))
+    // Special parameters: One of the following parameters is required: actionsLimit, timeLimit.
+    parameterBuilder.addParameter(new ParameterOptional('timeLimit',
+      $scope.timeLimit,
+      false))
+    parameterBuilder.addParameter(new ParameterOptional('actionsLimit',
+      $scope.actionsLimit,
+      false))
     // Optional parameters
     // UI Automator
     parameterBuilder.addParameter(new ParameterOptional('uiautomatorDaemonServerStartTimeout',
@@ -234,9 +253,12 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     })
   })
 
+  /**
+   * One of the following parameters is required: actionsLimit, timeLimit.
+   */
   $scope.checkTestButton = function() {
-    return typeof $scope.actionsLimit === 'undefined'
-      || typeof $scope.timeLimit === 'undefined'
+    return ((typeof $scope.actionsLimit === 'undefined' || $scope.actionsLimit == null)
+                && (typeof $scope.timeLimit === 'undefined' || $scope.timeLimit == null))
       || typeof $scope.randomSeed === 'undefined'
       || typeof $scope.upload === 'undefined'
       || $scope.upload.settled !== true
