@@ -425,5 +425,9 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
       || apkDir === null
   }
 
+  $scope.disabledIfCheckboxFalse = function(checkbox) {
+    return typeof checkbox === 'undefined' || checkbox === false
+  }
+
   setup()
 }
