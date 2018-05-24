@@ -15,236 +15,648 @@
           th
             span(translate) Description
       tbody
-        // actionsLimit
+        //////////////////////////////// Selectors
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span Selectors
+            td
+              span Description.
+            td
+            td
+        // Selectors-actionLimit
         tr
           td
             span Required
           td
-            span actionsLimit
+            span Selectors-actionLimit
           td
-            input(type='number', name='actionsLimit', min="1", step="1", ng-model='actionsLimit', style='width:10em')
+            input(type='number', name='selectorsActionLimit', min="1", step="1", ng-model='selectorsActionLimit', style='width:10em')
           td
-            span How many actions the GUI exploration strategy can conduct before terminating.
-        // timeLimit
+            span How many actions the GUI exploration strategy can conduct before terminating. One of the following parameters is required: actionLimit, timeLimit.
+        // Selectors-timeLimit
         tr
           td
             span Required
           td
-            span timeLimit
+            span Selectors-timeLimit
           td
-            input(type='number', name='timeLimit', min="1", step="1", ng-model='timeLimit', style='width:10em')
+            input(type='number', name='selectorsTimeLimit', min="1", step="1", ng-model='selectorsTimeLimit', style='width:10em')
           td
-            span How long the exploration of any given apk should take, in seconds. If set to 0, instead actionsLimit will be used.
-        // randomSeed
+            span How long the exploration of any given apk should take, in seconds. If set to 0, instead actionLimit will be used. One of the following parameters is required: actionLimit, timeLimit.
+        // Selectors-randomSeed
         tr
           td
             span Required
           td
-            span randomSeed
+            span Selectors-randomSeed
           td
-            input(type='number', name='randomSeed', min="1", step="1", ng-model='randomSeed', style='width:10em')
+            input(type='number', name='selectorsRandomSeed', min="-1", step="1", ng-model='selectorsRandomSeed', style='width:10em')
           td
             span The seed for a random generator used by a random-clicking GUI exploration strategy. If null, a seed will be randomized.
-        // takeScreenshots
+        // Selectors-pressBackProbability
+        tr
+          td
+            input(type='checkbox', name='selectorsPressBackProbabilityCB', ng-model='selectorsPressBackProbabilityCB', value=0, checked='')
+          td
+            span Selectors-pressBackProbability
+          td
+            input(type='number', name='selectorsPressBackProbability', min="0", step="0.01", ng-model='selectorsPressBackProbability', style='width:10em')
+          td
+            span Probability of randomly pressing the back button while exploring. Set to 0 to disable the press back strategy.
+        // Selectors-widgetIndexes
+        tr
+          td
+            input(type='checkbox', name='selectorsWidgetIndexesCB', ng-model='selectorsWidgetIndexesCB', value=0, checked='')
+          td
+            span Selectors-widgetIndexes
+          td
+            input(type='text', name='selectorsWidgetIndexes', ng-model='selectorsWidgetIndexes', style='width:10em')
+          td
+            span "Makes the exploration strategy to choose widgets to click that have the indexes as provided by this parameter, in sequence. The format is: [<first widget index>,<second widget index>,...<nth widget index>], starting indexing at 0. Example: [0,7,3]"
+        // Selectors-resetEvery
+        tr
+          td
+            input(type='checkbox', name='selectorsResetEveryCB', ng-model='selectorsResetEveryCB', value=0, checked='')
+          td
+            span Selectors-resetEvery
+          td
+            input(type='number', name='selectorsResetEvery', min="0", step="1", ng-model='selectorsResetEvery', style='width:10em')
+          td
+            span Number of actions to automatically reset the exploration from its initial activity. Set to 0 to disable.
+        // Selectors-stopOnExhaustion
         tr
           td
             span Checkbox
           td
-            span takeScreenshots
+            span Selectors
           td
-            input(type='checkbox', name='takeScreenshots', value='1', ng-model='takeScreenshotsCB')
+            input(type='checkbox', name='selectorsStopOnExhaustionCB', value='1', ng-model='selectorsStopOnExhaustionCB')
           td
-            span Take screenshot after each exploration action.
-        // uiautomatorDaemonServerStartTimeout
+            span Terminate exploration when all widgets have been explored at least 1x.
+        //////////////////////////////// Core
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span Core
+            td
+              span Description.
+            td
+            td
+        // Core-logLevel
         tr
           td
-            input(type='checkbox', name='uiautomatorDaemonServerStartTimeoutCB', ng-model='uiautomatorDaemonServerStartTimeoutCB', value=0, checked='')
+            input(type='checkbox', name='coreLogLevelCB', ng-model='coreLogLevelCB', value=0, checked='')
           td
-            span uiautomatorDaemonServerStartTimeout
+            span Core-logLevel
           td
-            input(type='number', name='uiautomatorDaemonServerStartTimeout', min="1", step="1", ng-model='uiautomatorDaemonServerStartTimeout', style='width:10em')
+            input(type='text', name='coreLogLevel', ng-model='coreLogLevel', style='width:10em')
           td
-            span How long DroidMate should wait, in milliseconds, for message on logcat confirming that UiAutomatorDaemonServer has started on android (virtual) device.
-        // uiautomatorDaemonServerStartQueryDelay
+            span Logging level of the entirety of application. Possible values, comma separated: info, debug, trace, warn, error.
+        //////////////////////////////// ApiMonitorServer
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span ApiMonitorServer
+            td
+              span Description.
+            td
+            td
+        // ApiMonitorServer-monitorSocketTimeout
         tr
           td
-            input(type='checkbox', name='uiautomatorDaemonServerStartQueryDelayCB', ng-model='uiautomatorDaemonServerStartQueryDelayCB', value=0, checked='')
+            input(type='checkbox', name='apiMonitorServerMonitorSocketTimeoutCB', ng-model='apiMonitorServerMonitorSocketTimeoutCB', value=0, checked='')
           td
-            span uiautomatorDaemonServerStartQueryDelay
+            span ApiMonitorServer-monitorSocketTimeout
           td
-            input(type='number', name='uiautomatorDaemonServerStartQueryDelay', min="1", step="1", ng-model='uiautomatorDaemonServerStartQueryDelay', style='width:10em')
+            input(type='number', name='apiMonitorServerMonitorSocketTimeout', min="0", step="1", ng-model='apiMonitorServerMonitorSocketTimeoutCB', style='width:10em')
           td
-            span How often DroidMate should query, in milliseconds, for message on logcat confirming that UiDaemonServer has started on android (virtual) device.
-        // uiautomatorDaemonSocketTimeout
+            span
+        // ApiMonitorServer-monitorUseLegacyStream
         tr
           td
-            input(type='checkbox', name='uiautomatorDaemonSocketTimeoutCB', ng-model='uiautomatorDaemonSocketTimeoutCB', value=0, checked='')
+            span Checkbox
           td
-            span uiautomatorDaemonSocketTimeout
+            span ApiMonitorServer-monitorUseLegacyStream
           td
-            input(type='number', name='uiautomatorDaemonSocketTimeout', min="1", step="1", ng-model='uiautomatorDaemonSocketTimeout', style='width:10em')
+            input(type='checkbox', name='apiMonitorServerMonitorUseLegacyStreamCB', value='1', ng-model='apiMonitorServerMonitorUseLegacyStreamCB')
           td
-            span No description.
-        // waitForWindowUpdateTimeout
+            span
+        // ApiMonitorServer-basePort
         tr
           td
-            input(type='checkbox', name='waitForWindowUpdateTimeoutCB', ng-model='waitForWindowUpdateTimeoutCB', value=0, checked='')
+            input(type='checkbox', name='apiMonitorServerBasePortCB', ng-model='apiMonitorServerBasePortCB', value=0, checked='')
           td
-            span waitForWindowUpdateTimeout
+            span ApiMonitorServer-basePort
           td
-            input(type='number', name='waitForWindowUpdateTimeout', min="1", step="1", ng-model='waitForWindowUpdateTimeout', style='width:10em')
+            input(type='number', name='apiMonitorServerBasePort', min="0", step="1", ng-model='apiMonitorServerBasePort', style='width:10em')
           td
-            span No description.
-        //// waitForGuiToStabilize
+            span
+        //////////////////////////////// ExecutionMode
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span ExecutionMode
+            td
+              span Description.
+            td
+            td
+        // Use a radio button group here, because the execution modes are only exclusively usable
+        // ExecutionMode-inline
+        tr
+          td
+            span Radio button
+          td
+            span ExecutionMode-inline
+          td
+            input(type='radio', name='executionMode', value='1', ng-model='executionModeInlineCB')
+          td
+            span If present, instead of normal run, DroidMate will inline all non-inlined apks. Before inlining backup copies of the apks will be created and put into a sub-directory of the directory containing the apks. This flag is not combinable with another execution mode.
+        // TODO not available on the farm right now
+        // ExecutionMode-report
         //tr
         //  td
         //    span Checkbox
         //  td
-        //    span waitForGuiToStabilize
+        //    span ExecutionMode-report
         //  td
-        //    input(type='checkbox', name='waitForGuiToStabilizeCB', value='1', ng-model='waitForGuiToStabilizeCB')
+        //    input(type='checkbox', name='executionModeReportCB', value='1', ng-model='executionModeReportCB')
         //  td
-        //    span Should the uiautomator-daemon wait for GUI state to stabilize after each click performed on the android device. Setting this to false will drastically speedup the clicking process, but will probably result in new clicks being sent while the results of previous one are still being processed.
-        // monitorSocketTimeout
+        //    span If present, instead of normal run, DroidMate will generate reports from previously serialized data.
+        // ExecutionMode-explore
         tr
           td
-            input(type='checkbox', name='monitorSocketTimeoutCB', ng-model='monitorSocketTimeoutCB', value=0, checked='')
+            span Radio button
           td
-            span monitorSocketTimeout
+            span ExecutionMode-explore
           td
-            input(type='number', name='monitorSocketTimeout', min="1", step="1", ng-model='monitorSocketTimeout', style='width:10em')
+            input(type='radio', name='executionMode', value='1', ng-model='executionModeExploreCB')
           td
-            span No description.
-        // monitorUseLogcat
+            span Run DroidMate in exploration mode.
+        // ExecutionMode-coverage
         tr
           td
-            span Checkbox
+            span Radio button
           td
-            span monitorUseLogcat
+            span ExecutionMode-coverage
           td
-            input(type='checkbox', name='monitorUseLogcatCB', value='1', ng-model='monitorUseLogcatCB')
+            input(type='radio', name='executionMode', value='1', ng-model='executionModeCoverageCB')
           td
-            span No description.
-        // checkDeviceAvailableAfterRebootAttempts
-        tr
-          td
-            input(type='checkbox', name='checkDeviceAvailableAfterRebootAttemptsCB', ng-model='checkDeviceAvailableAfterRebootAttemptsCB', value=0, checked='')
-          td
-            span checkDeviceAvailableAfterRebootAttempts
-          td
-            input(type='number', name='checkDeviceAvailableAfterRebootAttempts', min="1", step="1", ng-model='checkDeviceAvailableAfterRebootAttempts', style='width:10em')
-          td
-            span No description.
-        // checkDeviceAvailableAfterRebootFirstDelay
-        tr
-          td
-            input(type='checkbox', name='checkDeviceAvailableAfterRebootFirstDelayCB', ng-model='checkDeviceAvailableAfterRebootFirstDelayCB', value=0, checked='')
-          td
-            span checkDeviceAvailableAfterRebootFirstDelay
-          td
-            input(type='number', name='checkDeviceAvailableAfterRebootFirstDelay', min="1", step="1", ng-model='checkDeviceAvailableAfterRebootFirstDelay', style='width:10em')
-          td
-            span No description.
-        // checkDeviceAvailableAfterRebootLaterDelays
-        tr
-          td
-            input(type='checkbox', name='checkDeviceAvailableAfterRebootLaterDelaysCB', ng-model='checkDeviceAvailableAfterRebootLaterDelaysCB', value=0, checked='')
-          td
-            span checkDeviceAvailableAfterRebootLaterDelays
-          td
-            input(type='number', name='checkDeviceAvailableAfterRebootLaterDelays', min="1", step="1", ng-model='checkDeviceAvailableAfterRebootLaterDelays', style='width:10em')
-          td
-            span No description.
-        // clearPackageRetryAttempts
-        tr
-          td
-            input(type='checkbox', name='clearPackageRetryAttemptsCB', ng-model='clearPackageRetryAttemptsCB', value=0, checked='')
-          td
-            span clearPackageRetryAttempts
-          td
-            input(type='number', name='clearPackageRetryAttempts', min="1", step="1", ng-model='clearPackageRetryAttempts', style='width:10em')
-          td
-            span No description.
-        // monitorSocketTimeout
-        tr
-          td
-            input(type='checkbox', name='clearPackageRetryDelayCB', ng-model='clearPackageRetryDelayCB', value=0, checked='')
-          td
-            span monitorSocketTimeout
-          td
-            input(type='number', name='clearPackageRetryDelay', min="1", step="1", ng-model='clearPackageRetryDelay', style='width:10em')
-          td
-            span No description.
-        // closeANRAttempts
-        tr
-          td
-            input(type='checkbox', name='closeANRAttemptsCB', ng-model='closeANRAttemptsCB', value=0, checked='')
-          td
-            span monitorSocketTimeout
-          td
-            input(type='number', name='closeANRAttempts', min="1", step="1", ng-model='closeANRAttempts', style='width:10em')
-          td
-            span No description.
-        // closeANRDelay
-        tr
-          td
-            input(type='checkbox', name='closeANRDelayCB', ng-model='closeANRDelayCB', value=0, checked='')
-          td
-            span monitorSocketTimeout
-          td
-            input(type='number', name='closeANRDelay', min="1", step="1", ng-model='closeANRDelay', style='width:10em')
-          td
-            span No description.
-        // alwaysClickFirstWidget
+            span If present, instead of normal run, DroidMate will run in 'instrument APK for coverage' mode. This flag is not combinable with another execution mode.
+        //////////////////////////////// Deploy
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span Deploy
+            td
+              span Description.
+            td
+            td
+        // Deploy-installApk
         tr
           td
             span Checkbox
           td
-            span alwaysClickFirstWidget
+            span Deploy-installApk
           td
-            input(type='checkbox', name='alwaysClickFirstWidgetCB', value='1', ng-model='alwaysClickFirstWidgetCB')
+            input(type='checkbox', name='deployInstallApkCB', value='1', ng-model='deployInstallApkCB')
           td
-            span Should the exploration strategy always click the first widget instead of its default more complex behavior.
-        // checkAppIsRunningRetryAttempts
+            span
+        // Deploy-installAux
         tr
           td
             span Checkbox
           td
-            span checkAppIsRunningRetryAttempts
+            span Deploy-installAux
           td
-            input(type='checkbox', name='checkAppIsRunningRetryAttemptsCB', value='1', ng-model='checkAppIsRunningRetryAttemptsCB')
+            input(type='checkbox', name='deployInstallAuxCB', value='1', ng-model='deployInstallAuxCB')
           td
-            span No description.
-        // checkAppIsRunningRetryDelay
+            span Reinstall the auxiliary files (UIAutomator and Monitor) to the device. If the auxiliary files are not previously installed the exploration will fail.
+        // Deploy-uninstallApk
         tr
           td
             span Checkbox
           td
-            span checkAppIsRunningRetryDelay
+            span Deploy-uninstallApk
           td
-            input(type='checkbox', name='checkAppIsRunningRetryDelayCB', value='1', ng-model='checkAppIsRunningRetryDelayCB')
+            input(type='checkbox', name='deployUninstallApkCB', value='1', ng-model='deployUninstallApkCB')
           td
-            span No description.
-        // deployRawApks
+            span Uninstall the APK after the exploration.
+        // Deploy-uninstallAux
         tr
           td
             span Checkbox
           td
-            span deployRawApks
+            span Deploy-uninstallAux
           td
-            input(type='checkbox', name='deployRawApksCB', value='1', ng-model='deployRawApksCB')
+            input(type='checkbox', name='deployUninstallAuxCB', value='1', ng-model='deployUninstallAuxCB')
+          td
+            span Uninstall auxiliary files (UIAutomator and Monitor) after the exploration.
+        // Deploy-shuffleApks
+        // TODO currently just single apk possible
+        //tr
+        //  td
+        //    span Checkbox
+        //  td
+        //    span Deploy-shuffleApks
+        //  td
+        //    input(type='checkbox', name='deployShuffleApksCB', value='1', ng-model='deployShuffleApksCB')
+        //  td
+        //    span Explore the apks in the input directory in a random order.
+        // Deploy-deployRawApks
+        tr
+          td
+            span Checkbox
+          td
+            span Deploy-deployRawApks
+          td
+            input(type='checkbox', name='deployDeployRawApksCB', value='1', ng-model='deployDeployRawApksCB')
           td
             span Deploys apks to device in 'raw' form, that is, without instrumenting them. Will deploy them raw even if instrumented version is available from last run.
-        // report
+        //////////////////////////////// DeviceCommunication
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span DeviceCommunication
+            td
+              span Description.
+            td
+            td
+        // DeviceCommunication-checkAppIsRunningRetryAttempts
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', ng-model='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', value=0, checked='')
+          td
+            span DeviceCommunication-checkAppIsRunningRetryAttempts
+          td
+            input(type='number', name='deviceCommunicationCheckAppIsRunningRetryAttempts', min="0", step="1", ng-model='deviceCommunicationCheckAppIsRunningRetryAttempts', style='width:10em')
+          td
+            span Number of attempts to check if an app is running on the device.
+        // DeviceCommunication-checkAppIsRunningRetryDelay
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryDelayCB', ng-model='deviceCommunicationCheckAppIsRunningRetryDelayCB', value=0, checked='')
+          td
+            span DeviceCommunication-checkAppIsRunningRetryDelay
+          td
+            input(type='number', name='deviceCommunicationCheckAppIsRunningRetryDelay', min="0", step="1", ng-model='deviceCommunicationCheckAppIsRunningRetryDelay', style='width:10em')
+          td
+            span Timeout for each attempt to check if an app is running on the device in milliseconds.
+        // DeviceCommunication-checkDeviceAvailableAfterRebootAttempts
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', value=0, checked='')
+          td
+            span DeviceCommunication-checkDeviceAvailableAfterRebootAttempts
+          td
+            input(type='number', name='deviceCommunicationCheckDeviceAvailableAfterRebootAttempts', min="0", step="1", ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttempts', style='width:10em')
+          td
+            span Determines how often DroidMate checks if a device is available after a reboot.
+        // DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', value=0, checked='')
+          td
+            span DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay
+          td
+            input(type='number', name='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay', min="0", step="1", ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay', style='width:10em')
+          td
+            span The first delay after a device rebooted, before its availability will be checked.
+        // DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', value=0, checked='')
+          td
+            span DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays
+          td
+            input(type='number', name='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays', min="0", step="1", ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays', style='width:10em')
+          td
+            span The non-first delay after a device rebooted, before its availability will be checked.
+        // DeviceCommunication-clearPackageRetryAttempts
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationClearPackageRetryAttemptsCB', ng-model='deviceCommunicationClearPackageRetryAttemptsCB', value=0, checked='')
+          td
+            span DeviceCommunication-clearPackageRetryAttempts
+          td
+            input(type='number', name='deviceCommunicationClearPackageRetryAttempts', min="0", step="1", ng-model='deviceCommunicationClearPackageRetryAttempts', style='width:10em')
+          td
+            span Number of attempts to close a running app.
+        // DeviceCommunication-clearPackageRetryDelay
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationClearPackageRetryDelayCB', ng-model='clearPackageRetryDelayCB', value=0, checked='')
+          td
+            span DeviceCommunication-clearPackageRetryDelay
+          td
+            input(type='number', name='deviceCommunicationClearPackageRetryDelay', min="0", step="1", ng-model='deviceCommunicationClearPackageRetryDelay', style='width:10em')
+          td
+            span Delay after each failed attempt to close a running app.
+        // DeviceCommunication-closeANRAttempts
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationCloseANRAttemptsCB', ng-model='deviceCommunicationCloseANRAttemptsCB', value=0, checked='')
+          td
+            span DeviceCommunication-closeANRAttempts
+          td
+            input(type='number', name='deviceCommunicationCloseANRAttempts', min="0", step="1", ng-model='deviceCommunicationCloseANRAttempts', style='width:10em')
+          td
+            span Delay after each failed attempt close an 'application not responding' dialog.
+        // DeviceCommunication-closeANRDelay
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationCloseANRDelayCB', ng-model='deviceCommunicationCloseANRDelayCB', value=0, checked='')
+          td
+            span DeviceCommunication-closeANRDelay
+          td
+            input(type='number', name='deviceCommunicationCloseANRDelay', min="0", step="1", ng-model='deviceCommunicationCloseANRDelay', style='width:10em')
+          td
+            span Delay after each failed attempt close an 'application not responding' dialog.
+        // DeviceCommunication-getValidGuiSnapshotRetryAttempts
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationGetValidGuiSnapshotRetryAttemptsCB', ng-model='deviceCommunicationGetValidGuiSnapshotRetryAttemptsCB', value=0, checked='')
+          td
+            span DeviceCommunication-getValidGuiSnapshotRetryAttempts
+          td
+            input(type='number', name='deviceCommunicationGetValidGuiSnapshotRetryAttempts', min="0", step="1", ng-model='deviceCommunicationGetValidGuiSnapshotRetryAttempts', style='width:10em')
+          td
+            span Number of attempts to get a valid GUI snapshot from the device. If not snapshot is acquired the exploration stops.
+        // DeviceCommunication-getValidGuiSnapshotRetryDelay
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationGetValidGuiSnapshotRetryDelayCB', ng-model='deviceCommunicationGetValidGuiSnapshotRetryDelayCB', value=0, checked='')
+          td
+            span DeviceCommunication-getValidGuiSnapshotRetryDelay
+          td
+            input(type='number', name='deviceCommunicationGetValidGuiSnapshotRetryDelay', min="0", step="1", ng-model='deviceCommunicationGetValidGuiSnapshotRetryDelay', style='width:10em')
+          td
+            span Timeout for each attempt to get a valid GUI snapshot from the device in milliseconds.
+        // DeviceCommunication-stopAppRetryAttempts
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationStopAppRetryAttemptsCB', ng-model='deviceCommunicationStopAppRetryAttemptsCB', value=0, checked='')
+          td
+            span DeviceCommunication-stopAppRetryAttempts
+          td
+            input(type='number', name='deviceCommunicationStopAppRetryAttempts', min="0", step="1", ng-model='deviceCommunicationStopAppRetryAttempts', style='width:10em')
+          td
+            span Number of attempts to close an 'application has stopped' dialog.
+        // DeviceCommunication-stopAppSuccessCheckDelay
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationStopAppSuccessCheckDelayCB', ng-model='deviceCommunicationStopAppSuccessCheckDelayCB', value=0, checked='')
+          td
+            span DeviceCommunication-stopAppSuccessCheckDelay
+          td
+            input(type='number', name='deviceCommunicationStopAppSuccessCheckDelay', min="0", step="1", ng-model='deviceCommunicationStopAppSuccessCheckDelay', style='width:10em')
+          td
+            span Delay after each failed attempt close an 'application has stopped' dialog.
+        // DeviceCommunication-waitForCanRebootDelay
+        tr
+          td
+            input(type='checkbox', name='deviceCommunicationWaitForCanRebootDelayCB', ng-model='deviceCommunicationWaitForCanRebootDelayCB', value=0, checked='')
+          td
+            span DeviceCommunication-waitForCanRebootDelay
+          td
+            input(type='number', name='deviceCommunicationWaitForCanRebootDelay', min="0", step="1", ng-model='deviceCommunicationWaitForCanRebootDelay', style='width:10em')
+          td
+            span Delay (in milliseconds) after an attempt was made to reboot a device, before.
+        // DeviceCommunication-waitForDevice
         tr
           td
             span Checkbox
           td
-            span report
+            span DeviceCommunication-waitForDevice
           td
-            input(type='checkbox', name='reportCB', value='1', ng-model='reportCB')
+            input(type='checkbox', name='deviceCommunicationWaitForDeviceCB', value='1', ng-model='deviceCommunicationWaitForDeviceCB')
           td
-            span If present, instead of normal run, DroidMate will generate reports from previously serialized data.
+            span Wait for a device to be connected to the PC instead of cancelling the exploration.
+        //////////////////////////////// Exploration
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span Exploration
+            td
+              span Description.
+            td
+            td
+        // TODO not available on the farm right now
+        // Exploration-apksLimit
+        //tr
+        //  td
+        //    input(type='checkbox', name='', ng-model='', value=0, checked='')
+        //  td
+        //    span Exploration-apksLimit
+        //  td
+        //    input(type='number', name='', min="0", step="0", ng-model='', style='width:10em')
+        //  td
+        //    span Limits the number of apks on which DroidMate will run. 0 means no limit.
+        // TODO not available on the farm right now
+        // Exploration-apkNames
+        //tr
+        //  td
+        //    input(type='checkbox', name='', ng-model='', value=0, checked='')
+        //  td
+        //    span Exploration-apksLimit
+        //  td
+        //    input(type='number', name='', min="0", step="0", ng-model='', style='width:10em')
+        //  td
+        //    span Limits the number of apks on which DroidMate will run. 0 means no limit.
+        // Exploration-deviceIndex
+        tr
+          td
+            input(type='checkbox', name='explorationDeviceIndexCB', ng-model='explorationDeviceIndexCB', value=0, checked='')
+          td
+            span Exploration-deviceIndex
+          td
+            input(type='number', name='explorationDeviceIndex', min="0", step="0", ng-model='explorationDeviceIndex', style='width:10em')
+          td
+            span Index of the device to be used (from adb devices). Zero based.
+        // Exploration-runOnNotInlined
+        tr
+          td
+            span Checkbox
+          td
+            span Exploration-runOnNotInlined
+          td
+            input(type='checkbox', name='explorationRunOnNotInlinedCB', value='1', ng-model='explorationRunOnNotInlinedCB')
+          td
+            span Allow DroidMate to run on non-inlined apks.
+        // Exploration-launchActivityDelay
+        tr
+          td
+            input(type='checkbox', name='explorationLaunchActivityDelayCB', ng-model='explorationLaunchActivityDelayCB', value=0, checked='')
+          td
+            span Exploration-launchActivityDelay
+          td
+            input(type='number', name='explorationLaunchActivityDelay', min="0", step="0", ng-model='explorationLaunchActivityDelay', style='width:10em')
+          td
+            span Delay (in milliseconds) to wait for the app to load before continuing the exploration after a reset (or exploration start).
+        // Exploration-launchActivityTimeout
+        tr
+          td
+            input(type='checkbox', name='explorationLaunchActivityTimeoutCB', ng-model='explorationLaunchActivityTimeoutCB', value=0, checked='')
+          td
+            span Exploration-launchActivityTimeout
+          td
+            input(type='number', name='explorationLaunchActivityTimeout', min="0", step="0", ng-model='explorationLaunchActivityTimeout', style='width:10em')
+          td
+            span Maximum amount of time to be waited for an app to start after a reset in milliseconds.
+        // Exploration-apiVersion
+        tr
+          td
+            input(type='checkbox', name='explorationApiVersionCB', ng-model='explorationApiVersionCB', value=0, checked='')
+          td
+            span Exploration-apiVersion
+          td
+            input(type='number', name='explorationApiVersion', min="0", step="0", ng-model='explorationApiVersion', style='width:10em')
+          td
+            span Has to be set to the Android API version corresponding to the (virtual) devices on which DroidMate will run. Currently supported values: api23
+        //////////////////////////////// Strategies
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span Strategies
+            td
+              span Description.
+            td
+            td
+        // Strategies-reset
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-reset
+          td
+            input(type='checkbox', name='strategiesResetCB', value='1', ng-model='strategiesResetCB')
+          td
+            span Enables use of the reset strategy during an exploration.
+        // Strategies-explore
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-explore
+          td
+            input(type='checkbox', name='strategiesExploreCB', value='1', ng-model='strategiesExploreCB')
+          td
+            span Enables use of biased random exploration strategy.
+        // Strategies-terminate
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-terminate
+          td
+            input(type='checkbox', name='strategiesTerminateCB', value='1', ng-model='strategiesTerminateCB')
+          td
+            span Enables use of default terminate strategy.
+        // Strategies-back
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-back
+          td
+            input(type='checkbox', name='strategiesBackCB', value='1', ng-model='strategiesBackCB')
+          td
+            span Enables use of 'press back button' strategy.
+        // Strategies-modelBased
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-modelBased
+          td
+            input(type='checkbox', name='strategiesModelBasedCB', value='1', ng-model='strategiesModelBasedCB')
+          td
+            span Enables use of random exploration strategy using static model.
+        // Strategies-fitnessProportionate
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-fitnessProportionate
+          td
+            input(type='checkbox', name='strategiesFitnessProportionateCB', value='1', ng-model='strategiesFitnessProportionateCB')
+          td
+            span Enables use of random exploration strategy using static model and fitness proportionate selection.
+        // Strategies-allowRuntimeDialog
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-allowRuntimeDialog
+          td
+            input(type='checkbox', name='strategiesAllowRuntimeDialogCB', value='1', ng-model='strategiesAllowRuntimeDialogCB')
+          td
+            span Enables use of strategy to always click 'Allow' on permission dialogs.
+        // Strategies-denyRuntimeDialog
+        tr
+          td
+            span Checkbox
+          td
+            span Strategies-denyRuntimeDialog
+          td
+            input(type='checkbox', name='strategiesDenyRuntimeDialogCB', value='1', ng-model='strategiesDenyRuntimeDialogCB')
+          td
+            span Enables use of strategy to always click 'Deny' on permission dialogs.
+        // TODO not available on the farm right now
+        // Strategies-playback
+        //tr
+        //  td
+        //    span Checkbox
+        //  td
+        //    span Strategies-playback
+        //  td
+        //    input(type='checkbox', name='strategiesPlaybackCB', value='1', ng-model='strategiesPlaybackCB')
+        //  td
+        //    span Enables use of playback strategy (if a playback model is provided).
+        //////////////////////////////// Report
+        // TODO not available on the farm right now
+        // inputDir and includePlots
+        //////////////////////////////// UiAutomatorServer
+        tbody(class="tbody-dark-title")
+          tr
+            td
+              span UiAutomatorServer
+            td
+              span Description.
+            td
+            td
+        // UiAutomatorServer-startTimeout
+        tr
+          td
+            input(type='checkbox', name='uiAutomatorServerStartTimeoutCB', ng-model='uiAutomatorServerStartTimeoutCB', value=0, checked='')
+          td
+            span UiAutomatorServer-startTimeout
+          td
+            input(type='number', name='uiAutomatorServerStartTimeout', min="0", step="1", ng-model='uiAutomatorServerStartTimeout', style='width:10em')
+          td
+            span How long DroidMate should wait, in milliseconds, for message on logcat confirming that UiAutomatorDaemonServer has started on android (virtual) device.
+        // UiAutomatorServer-startQueryDelay
+        tr
+          td
+            input(type='checkbox', name='uiAutomatorServerStartQueryDelayCB', ng-model='uiAutomatorServerStartQueryDelayCB', value=0, checked='')
+          td
+            span UiAutomatorServer-startQueryDelay
+          td
+            input(type='number', name='uiAutomatorServerStartQueryDelay', min="0", step="1", ng-model='uiAutomatorServerStartQueryDelay', style='width:10em')
+          td
+            span How often DroidMate should query, in milliseconds, for message on logcat confirming that UiDaemonServer has started on android (virtual) device.
+        // UiAutomatorServer-socketTimeout
+        tr
+          td
+            input(type='checkbox', name='uiAutomatorServerSocketTimeoutCB', ng-model='uiAutomatorServerSocketTimeoutCB', value=0, checked='')
+          td
+            span UiAutomatorServer-socketTimeout
+          td
+            input(type='number', name='uiAutomatorServerSocketTimeout', min="0", step="1", ng-model='uiAutomatorServerSocketTimeout', style='width:10em')
+          td
+            span Socket timeout to communicate with the UiDaemonServer.
+
+
   .widget-content.padded()
     .drop-area(ng-file-drop='uploadFile($files)', ng-file-drag-over-class='dragover').file-input.btn-file
       input(type='file', ng-file-select='uploadFile($files)')

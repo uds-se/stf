@@ -75,7 +75,6 @@ module.exports = function DeviceListDetailsDirective(
             xmlHttp.open('GET', '/api/v1/user/isUserAllowedToUseAdditionalDevice/', false) // false for synchronous request
             xmlHttp.send(null)
             let isAllowed = angular.fromJson(xmlHttp.responseText).isAllowed
-            console.log('isAllowed : ' + isAllowed)
             if (!isAllowed) {
               e.preventDefault()
             }
