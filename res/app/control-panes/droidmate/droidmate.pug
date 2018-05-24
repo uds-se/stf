@@ -7,9 +7,9 @@
       thead
         tr
           th
-            span(translate) Use Parameter
-          th
             span(translate) Parameter Name
+          th
+            span(translate) Use Parameter
           th
             span(translate) Parameter Value
           th
@@ -21,15 +21,14 @@
             td
               span Selectors
             td
-              span Description.
             td
             td
         // Selectors-actionLimit
         tr
           td
-            span Required
-          td
             span Selectors-actionLimit
+          td
+            span Required
           td
             input(type='number', name='selectorsActionLimit', min="1", step="1", ng-model='selectorsActionLimit', style='width:10em')
           td
@@ -37,9 +36,9 @@
         // Selectors-timeLimit
         tr
           td
-            span Required
-          td
             span Selectors-timeLimit
+          td
+            span Required
           td
             input(type='number', name='selectorsTimeLimit', min="1", step="1", ng-model='selectorsTimeLimit', style='width:10em')
           td
@@ -47,9 +46,9 @@
         // Selectors-randomSeed
         tr
           td
-            span Required
-          td
             span Selectors-randomSeed
+          td
+            span Required
           td
             input(type='number', name='selectorsRandomSeed', min="-1", step="1", ng-model='selectorsRandomSeed', style='width:10em')
           td
@@ -57,9 +56,9 @@
         // Selectors-pressBackProbability
         tr
           td
-            input(type='checkbox', name='selectorsPressBackProbabilityCB', ng-model='selectorsPressBackProbabilityCB', value=0, checked='')
-          td
             span Selectors-pressBackProbability
+          td
+            input(type='checkbox', name='selectorsPressBackProbabilityCB', ng-model='selectorsPressBackProbabilityCB', value=0, checked='')
           td
             input(type='number', name='selectorsPressBackProbability', min="0", step="0.01", ng-model='selectorsPressBackProbability', style='width:10em')
           td
@@ -67,9 +66,9 @@
         // Selectors-widgetIndexes
         tr
           td
-            input(type='checkbox', name='selectorsWidgetIndexesCB', ng-model='selectorsWidgetIndexesCB', value=0, checked='')
-          td
             span Selectors-widgetIndexes
+          td
+            input(type='checkbox', name='selectorsWidgetIndexesCB', ng-model='selectorsWidgetIndexesCB', value=0, checked='')
           td
             input(type='text', name='selectorsWidgetIndexes', ng-model='selectorsWidgetIndexes', style='width:10em')
           td
@@ -77,9 +76,9 @@
         // Selectors-resetEvery
         tr
           td
-            input(type='checkbox', name='selectorsResetEveryCB', ng-model='selectorsResetEveryCB', value=0, checked='')
-          td
             span Selectors-resetEvery
+          td
+            input(type='checkbox', name='selectorsResetEveryCB', ng-model='selectorsResetEveryCB', value=0, checked='')
           td
             input(type='number', name='selectorsResetEvery', min="0", step="1", ng-model='selectorsResetEvery', style='width:10em')
           td
@@ -87,9 +86,9 @@
         // Selectors-stopOnExhaustion
         tr
           td
-            span Checkbox
-          td
             span Selectors
+          td
+            span
           td
             input(type='checkbox', name='selectorsStopOnExhaustionCB', value='1', ng-model='selectorsStopOnExhaustionCB')
           td
@@ -100,15 +99,14 @@
             td
               span Core
             td
-              span Description.
             td
             td
         // Core-logLevel
         tr
           td
-            input(type='checkbox', name='coreLogLevelCB', ng-model='coreLogLevelCB', value=0, checked='')
-          td
             span Core-logLevel
+          td
+            input(type='checkbox', name='coreLogLevelCB', ng-model='coreLogLevelCB', value=0, checked='')
           td
             input(type='text', name='coreLogLevel', ng-model='coreLogLevel', style='width:10em')
           td
@@ -119,55 +117,54 @@
             td
               span ApiMonitorServer
             td
-              span Description.
             td
             td
         // ApiMonitorServer-monitorSocketTimeout
         tr
           td
-            input(type='checkbox', name='apiMonitorServerMonitorSocketTimeoutCB', ng-model='apiMonitorServerMonitorSocketTimeoutCB', value=0, checked='')
-          td
             span ApiMonitorServer-monitorSocketTimeout
+          td
+            input(type='checkbox', name='apiMonitorServerMonitorSocketTimeoutCB', ng-model='apiMonitorServerMonitorSocketTimeoutCB', value=0, checked='')
           td
             input(type='number', name='apiMonitorServerMonitorSocketTimeout', min="0", step="1", ng-model='apiMonitorServerMonitorSocketTimeoutCB', style='width:10em')
           td
-            span
+            span Socket timeout to communicate with the API monitor service.
         // ApiMonitorServer-monitorUseLegacyStream
         tr
           td
-            span Checkbox
-          td
             span ApiMonitorServer-monitorUseLegacyStream
+          td
+            span
           td
             input(type='checkbox', name='apiMonitorServerMonitorUseLegacyStreamCB', value='1', ng-model='apiMonitorServerMonitorUseLegacyStreamCB')
           td
-            span
+            span Use legacy Java serialization API for device communication (not recommended).
         // ApiMonitorServer-basePort
         tr
           td
-            input(type='checkbox', name='apiMonitorServerBasePortCB', ng-model='apiMonitorServerBasePortCB', value=0, checked='')
-          td
             span ApiMonitorServer-basePort
+          td
+            input(type='checkbox', name='apiMonitorServerBasePortCB', ng-model='apiMonitorServerBasePortCB', value=0, checked='')
           td
             input(type='number', name='apiMonitorServerBasePort', min="0", step="1", ng-model='apiMonitorServerBasePort', style='width:10em')
           td
-            span
+            span The base port for the communication with the the API monitor service. DroidMate communicates over this base port + device index.
         //////////////////////////////// ExecutionMode
         tbody(class="tbody-dark-title")
           tr
             td
-              span ExecutionMode
-            td
               span Description.
+            td
+              span ExecutionMode
             td
             td
         // Use a radio button group here, because the execution modes are only exclusively usable
         // ExecutionMode-inline
         tr
           td
-            span Radio button
-          td
             span ExecutionMode-inline
+          td
+            span
           td
             input(type='radio', name='executionMode', value='1', ng-model='executionModeInlineCB')
           td
@@ -176,7 +173,7 @@
         // ExecutionMode-report
         //tr
         //  td
-        //    span Checkbox
+        //    span
         //  td
         //    span ExecutionMode-report
         //  td
@@ -186,9 +183,9 @@
         // ExecutionMode-explore
         tr
           td
-            span Radio button
-          td
             span ExecutionMode-explore
+          td
+            span
           td
             input(type='radio', name='executionMode', value='1', ng-model='executionModeExploreCB')
           td
@@ -196,9 +193,9 @@
         // ExecutionMode-coverage
         tr
           td
-            span Radio button
-          td
             span ExecutionMode-coverage
+          td
+            span
           td
             input(type='radio', name='executionMode', value='1', ng-model='executionModeCoverageCB')
           td
@@ -209,25 +206,24 @@
             td
               span Deploy
             td
-              span Description.
             td
             td
         // Deploy-installApk
         tr
           td
-            span Checkbox
-          td
             span Deploy-installApk
+          td
+            span
           td
             input(type='checkbox', name='deployInstallApkCB', value='1', ng-model='deployInstallApkCB')
           td
-            span
+            span Reinstall the app to the device. If the app is not previously installed the exploration will fail.
         // Deploy-installAux
         tr
           td
-            span Checkbox
-          td
             span Deploy-installAux
+          td
+            span
           td
             input(type='checkbox', name='deployInstallAuxCB', value='1', ng-model='deployInstallAuxCB')
           td
@@ -235,9 +231,9 @@
         // Deploy-uninstallApk
         tr
           td
-            span Checkbox
-          td
             span Deploy-uninstallApk
+          td
+            span
           td
             input(type='checkbox', name='deployUninstallApkCB', value='1', ng-model='deployUninstallApkCB')
           td
@@ -245,9 +241,9 @@
         // Deploy-uninstallAux
         tr
           td
-            span Checkbox
-          td
             span Deploy-uninstallAux
+          td
+            span
           td
             input(type='checkbox', name='deployUninstallAuxCB', value='1', ng-model='deployUninstallAuxCB')
           td
@@ -256,7 +252,7 @@
         // TODO currently just single apk possible
         //tr
         //  td
-        //    span Checkbox
+        //    span
         //  td
         //    span Deploy-shuffleApks
         //  td
@@ -266,9 +262,9 @@
         // Deploy-deployRawApks
         tr
           td
-            span Checkbox
-          td
             span Deploy-deployRawApks
+          td
+            span
           td
             input(type='checkbox', name='deployDeployRawApksCB', value='1', ng-model='deployDeployRawApksCB')
           td
@@ -279,15 +275,14 @@
             td
               span DeviceCommunication
             td
-              span Description.
             td
             td
         // DeviceCommunication-checkAppIsRunningRetryAttempts
         tr
           td
-            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', ng-model='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', value=0, checked='')
-          td
             span DeviceCommunication-checkAppIsRunningRetryAttempts
+          td
+            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', ng-model='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationCheckAppIsRunningRetryAttempts', min="0", step="1", ng-model='deviceCommunicationCheckAppIsRunningRetryAttempts', style='width:10em')
           td
@@ -295,9 +290,9 @@
         // DeviceCommunication-checkAppIsRunningRetryDelay
         tr
           td
-            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryDelayCB', ng-model='deviceCommunicationCheckAppIsRunningRetryDelayCB', value=0, checked='')
-          td
             span DeviceCommunication-checkAppIsRunningRetryDelay
+          td
+            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryDelayCB', ng-model='deviceCommunicationCheckAppIsRunningRetryDelayCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationCheckAppIsRunningRetryDelay', min="0", step="1", ng-model='deviceCommunicationCheckAppIsRunningRetryDelay', style='width:10em')
           td
@@ -305,9 +300,9 @@
         // DeviceCommunication-checkDeviceAvailableAfterRebootAttempts
         tr
           td
-            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', value=0, checked='')
-          td
             span DeviceCommunication-checkDeviceAvailableAfterRebootAttempts
+          td
+            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationCheckDeviceAvailableAfterRebootAttempts', min="0", step="1", ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttempts', style='width:10em')
           td
@@ -315,9 +310,9 @@
         // DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay
         tr
           td
-            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', value=0, checked='')
-          td
             span DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay
+          td
+            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay', min="0", step="1", ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay', style='width:10em')
           td
@@ -325,9 +320,9 @@
         // DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays
         tr
           td
-            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', value=0, checked='')
-          td
             span DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays
+          td
+            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays', min="0", step="1", ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays', style='width:10em')
           td
@@ -335,9 +330,9 @@
         // DeviceCommunication-clearPackageRetryAttempts
         tr
           td
-            input(type='checkbox', name='deviceCommunicationClearPackageRetryAttemptsCB', ng-model='deviceCommunicationClearPackageRetryAttemptsCB', value=0, checked='')
-          td
             span DeviceCommunication-clearPackageRetryAttempts
+          td
+            input(type='checkbox', name='deviceCommunicationClearPackageRetryAttemptsCB', ng-model='deviceCommunicationClearPackageRetryAttemptsCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationClearPackageRetryAttempts', min="0", step="1", ng-model='deviceCommunicationClearPackageRetryAttempts', style='width:10em')
           td
@@ -345,9 +340,9 @@
         // DeviceCommunication-clearPackageRetryDelay
         tr
           td
-            input(type='checkbox', name='deviceCommunicationClearPackageRetryDelayCB', ng-model='clearPackageRetryDelayCB', value=0, checked='')
-          td
             span DeviceCommunication-clearPackageRetryDelay
+          td
+            input(type='checkbox', name='deviceCommunicationClearPackageRetryDelayCB', ng-model='clearPackageRetryDelayCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationClearPackageRetryDelay', min="0", step="1", ng-model='deviceCommunicationClearPackageRetryDelay', style='width:10em')
           td
@@ -355,9 +350,9 @@
         // DeviceCommunication-closeANRAttempts
         tr
           td
-            input(type='checkbox', name='deviceCommunicationCloseANRAttemptsCB', ng-model='deviceCommunicationCloseANRAttemptsCB', value=0, checked='')
-          td
             span DeviceCommunication-closeANRAttempts
+          td
+            input(type='checkbox', name='deviceCommunicationCloseANRAttemptsCB', ng-model='deviceCommunicationCloseANRAttemptsCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationCloseANRAttempts', min="0", step="1", ng-model='deviceCommunicationCloseANRAttempts', style='width:10em')
           td
@@ -365,9 +360,9 @@
         // DeviceCommunication-closeANRDelay
         tr
           td
-            input(type='checkbox', name='deviceCommunicationCloseANRDelayCB', ng-model='deviceCommunicationCloseANRDelayCB', value=0, checked='')
-          td
             span DeviceCommunication-closeANRDelay
+          td
+            input(type='checkbox', name='deviceCommunicationCloseANRDelayCB', ng-model='deviceCommunicationCloseANRDelayCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationCloseANRDelay', min="0", step="1", ng-model='deviceCommunicationCloseANRDelay', style='width:10em')
           td
@@ -375,9 +370,9 @@
         // DeviceCommunication-getValidGuiSnapshotRetryAttempts
         tr
           td
-            input(type='checkbox', name='deviceCommunicationGetValidGuiSnapshotRetryAttemptsCB', ng-model='deviceCommunicationGetValidGuiSnapshotRetryAttemptsCB', value=0, checked='')
-          td
             span DeviceCommunication-getValidGuiSnapshotRetryAttempts
+          td
+            input(type='checkbox', name='deviceCommunicationGetValidGuiSnapshotRetryAttemptsCB', ng-model='deviceCommunicationGetValidGuiSnapshotRetryAttemptsCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationGetValidGuiSnapshotRetryAttempts', min="0", step="1", ng-model='deviceCommunicationGetValidGuiSnapshotRetryAttempts', style='width:10em')
           td
@@ -385,9 +380,9 @@
         // DeviceCommunication-getValidGuiSnapshotRetryDelay
         tr
           td
-            input(type='checkbox', name='deviceCommunicationGetValidGuiSnapshotRetryDelayCB', ng-model='deviceCommunicationGetValidGuiSnapshotRetryDelayCB', value=0, checked='')
-          td
             span DeviceCommunication-getValidGuiSnapshotRetryDelay
+          td
+            input(type='checkbox', name='deviceCommunicationGetValidGuiSnapshotRetryDelayCB', ng-model='deviceCommunicationGetValidGuiSnapshotRetryDelayCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationGetValidGuiSnapshotRetryDelay', min="0", step="1", ng-model='deviceCommunicationGetValidGuiSnapshotRetryDelay', style='width:10em')
           td
@@ -395,9 +390,9 @@
         // DeviceCommunication-stopAppRetryAttempts
         tr
           td
-            input(type='checkbox', name='deviceCommunicationStopAppRetryAttemptsCB', ng-model='deviceCommunicationStopAppRetryAttemptsCB', value=0, checked='')
-          td
             span DeviceCommunication-stopAppRetryAttempts
+          td
+            input(type='checkbox', name='deviceCommunicationStopAppRetryAttemptsCB', ng-model='deviceCommunicationStopAppRetryAttemptsCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationStopAppRetryAttempts', min="0", step="1", ng-model='deviceCommunicationStopAppRetryAttempts', style='width:10em')
           td
@@ -405,9 +400,9 @@
         // DeviceCommunication-stopAppSuccessCheckDelay
         tr
           td
-            input(type='checkbox', name='deviceCommunicationStopAppSuccessCheckDelayCB', ng-model='deviceCommunicationStopAppSuccessCheckDelayCB', value=0, checked='')
-          td
             span DeviceCommunication-stopAppSuccessCheckDelay
+          td
+            input(type='checkbox', name='deviceCommunicationStopAppSuccessCheckDelayCB', ng-model='deviceCommunicationStopAppSuccessCheckDelayCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationStopAppSuccessCheckDelay', min="0", step="1", ng-model='deviceCommunicationStopAppSuccessCheckDelay', style='width:10em')
           td
@@ -415,9 +410,9 @@
         // DeviceCommunication-waitForCanRebootDelay
         tr
           td
-            input(type='checkbox', name='deviceCommunicationWaitForCanRebootDelayCB', ng-model='deviceCommunicationWaitForCanRebootDelayCB', value=0, checked='')
-          td
             span DeviceCommunication-waitForCanRebootDelay
+          td
+            input(type='checkbox', name='deviceCommunicationWaitForCanRebootDelayCB', ng-model='deviceCommunicationWaitForCanRebootDelayCB', value=0, checked='')
           td
             input(type='number', name='deviceCommunicationWaitForCanRebootDelay', min="0", step="1", ng-model='deviceCommunicationWaitForCanRebootDelay', style='width:10em')
           td
@@ -425,9 +420,9 @@
         // DeviceCommunication-waitForDevice
         tr
           td
-            span Checkbox
-          td
             span DeviceCommunication-waitForDevice
+          td
+            span
           td
             input(type='checkbox', name='deviceCommunicationWaitForDeviceCB', value='1', ng-model='deviceCommunicationWaitForDeviceCB')
           td
@@ -438,7 +433,6 @@
             td
               span Exploration
             td
-              span Description.
             td
             td
         // TODO not available on the farm right now
@@ -466,9 +460,9 @@
         // Exploration-deviceIndex
         tr
           td
-            input(type='checkbox', name='explorationDeviceIndexCB', ng-model='explorationDeviceIndexCB', value=0, checked='')
-          td
             span Exploration-deviceIndex
+          td
+            input(type='checkbox', name='explorationDeviceIndexCB', ng-model='explorationDeviceIndexCB', value=0, checked='')
           td
             input(type='number', name='explorationDeviceIndex', min="0", step="0", ng-model='explorationDeviceIndex', style='width:10em')
           td
@@ -476,9 +470,9 @@
         // Exploration-runOnNotInlined
         tr
           td
-            span Checkbox
-          td
             span Exploration-runOnNotInlined
+          td
+            span
           td
             input(type='checkbox', name='explorationRunOnNotInlinedCB', value='1', ng-model='explorationRunOnNotInlinedCB')
           td
@@ -486,9 +480,9 @@
         // Exploration-launchActivityDelay
         tr
           td
-            input(type='checkbox', name='explorationLaunchActivityDelayCB', ng-model='explorationLaunchActivityDelayCB', value=0, checked='')
-          td
             span Exploration-launchActivityDelay
+          td
+            input(type='checkbox', name='explorationLaunchActivityDelayCB', ng-model='explorationLaunchActivityDelayCB', value=0, checked='')
           td
             input(type='number', name='explorationLaunchActivityDelay', min="0", step="0", ng-model='explorationLaunchActivityDelay', style='width:10em')
           td
@@ -496,9 +490,9 @@
         // Exploration-launchActivityTimeout
         tr
           td
-            input(type='checkbox', name='explorationLaunchActivityTimeoutCB', ng-model='explorationLaunchActivityTimeoutCB', value=0, checked='')
-          td
             span Exploration-launchActivityTimeout
+          td
+            input(type='checkbox', name='explorationLaunchActivityTimeoutCB', ng-model='explorationLaunchActivityTimeoutCB', value=0, checked='')
           td
             input(type='number', name='explorationLaunchActivityTimeout', min="0", step="0", ng-model='explorationLaunchActivityTimeout', style='width:10em')
           td
@@ -506,9 +500,9 @@
         // Exploration-apiVersion
         tr
           td
-            input(type='checkbox', name='explorationApiVersionCB', ng-model='explorationApiVersionCB', value=0, checked='')
-          td
             span Exploration-apiVersion
+          td
+            input(type='checkbox', name='explorationApiVersionCB', ng-model='explorationApiVersionCB', value=0, checked='')
           td
             input(type='number', name='explorationApiVersion', min="0", step="0", ng-model='explorationApiVersion', style='width:10em')
           td
@@ -519,15 +513,14 @@
             td
               span Strategies
             td
-              span Description.
             td
             td
         // Strategies-reset
         tr
           td
-            span Checkbox
-          td
             span Strategies-reset
+          td
+            span
           td
             input(type='checkbox', name='strategiesResetCB', value='1', ng-model='strategiesResetCB')
           td
@@ -535,9 +528,9 @@
         // Strategies-explore
         tr
           td
-            span Checkbox
-          td
             span Strategies-explore
+          td
+            span
           td
             input(type='checkbox', name='strategiesExploreCB', value='1', ng-model='strategiesExploreCB')
           td
@@ -545,9 +538,9 @@
         // Strategies-terminate
         tr
           td
-            span Checkbox
-          td
             span Strategies-terminate
+          td
+            span
           td
             input(type='checkbox', name='strategiesTerminateCB', value='1', ng-model='strategiesTerminateCB')
           td
@@ -555,9 +548,9 @@
         // Strategies-back
         tr
           td
-            span Checkbox
-          td
             span Strategies-back
+          td
+            span
           td
             input(type='checkbox', name='strategiesBackCB', value='1', ng-model='strategiesBackCB')
           td
@@ -565,9 +558,9 @@
         // Strategies-modelBased
         tr
           td
-            span Checkbox
-          td
             span Strategies-modelBased
+          td
+            span
           td
             input(type='checkbox', name='strategiesModelBasedCB', value='1', ng-model='strategiesModelBasedCB')
           td
@@ -575,9 +568,9 @@
         // Strategies-fitnessProportionate
         tr
           td
-            span Checkbox
-          td
             span Strategies-fitnessProportionate
+          td
+            span
           td
             input(type='checkbox', name='strategiesFitnessProportionateCB', value='1', ng-model='strategiesFitnessProportionateCB')
           td
@@ -585,9 +578,9 @@
         // Strategies-allowRuntimeDialog
         tr
           td
-            span Checkbox
-          td
             span Strategies-allowRuntimeDialog
+          td
+            span
           td
             input(type='checkbox', name='strategiesAllowRuntimeDialogCB', value='1', ng-model='strategiesAllowRuntimeDialogCB')
           td
@@ -595,9 +588,9 @@
         // Strategies-denyRuntimeDialog
         tr
           td
-            span Checkbox
-          td
             span Strategies-denyRuntimeDialog
+          td
+            span
           td
             input(type='checkbox', name='strategiesDenyRuntimeDialogCB', value='1', ng-model='strategiesDenyRuntimeDialogCB')
           td
@@ -606,7 +599,7 @@
         // Strategies-playback
         //tr
         //  td
-        //    span Checkbox
+        //    span
         //  td
         //    span Strategies-playback
         //  td
@@ -622,15 +615,14 @@
             td
               span UiAutomatorServer
             td
-              span Description.
             td
             td
         // UiAutomatorServer-startTimeout
         tr
           td
-            input(type='checkbox', name='uiAutomatorServerStartTimeoutCB', ng-model='uiAutomatorServerStartTimeoutCB', value=0, checked='')
-          td
             span UiAutomatorServer-startTimeout
+          td
+            input(type='checkbox', name='uiAutomatorServerStartTimeoutCB', ng-model='uiAutomatorServerStartTimeoutCB', value=0, checked='')
           td
             input(type='number', name='uiAutomatorServerStartTimeout', min="0", step="1", ng-model='uiAutomatorServerStartTimeout', style='width:10em')
           td
@@ -638,9 +630,9 @@
         // UiAutomatorServer-startQueryDelay
         tr
           td
-            input(type='checkbox', name='uiAutomatorServerStartQueryDelayCB', ng-model='uiAutomatorServerStartQueryDelayCB', value=0, checked='')
-          td
             span UiAutomatorServer-startQueryDelay
+          td
+            input(type='checkbox', name='uiAutomatorServerStartQueryDelayCB', ng-model='uiAutomatorServerStartQueryDelayCB', value=0, checked='')
           td
             input(type='number', name='uiAutomatorServerStartQueryDelay', min="0", step="1", ng-model='uiAutomatorServerStartQueryDelay', style='width:10em')
           td
@@ -648,9 +640,9 @@
         // UiAutomatorServer-socketTimeout
         tr
           td
-            input(type='checkbox', name='uiAutomatorServerSocketTimeoutCB', ng-model='uiAutomatorServerSocketTimeoutCB', value=0, checked='')
-          td
             span UiAutomatorServer-socketTimeout
+          td
+            input(type='checkbox', name='uiAutomatorServerSocketTimeoutCB', ng-model='uiAutomatorServerSocketTimeoutCB', value=0, checked='')
           td
             input(type='number', name='uiAutomatorServerSocketTimeout', min="0", step="1", ng-model='uiAutomatorServerSocketTimeout', style='width:10em')
           td
