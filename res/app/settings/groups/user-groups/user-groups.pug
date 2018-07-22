@@ -22,7 +22,7 @@
           .key-list-details
             .key-list-title(ng-bind='group.limitOfActivelyUsedDevices >= maxSafeInteger ? group.title + "(No limit)" : group.title + "(Limit of actively used devices: " + group.limitOfActivelyUsedDevices + ")"')
 
-          button.btn.btn-xs.btn-danger-outline.pull-right.key-list-remove(ng-click='removeUserGroup(group)')
+          button.btn.btn-xs.btn-danger-outline.pull-right.key-list-remove(ng-click='removeUserGroup(group)', ng-if='group.title!="Admins"')
             i.fa.fa-trash-o
             span(translate) Remove
 
