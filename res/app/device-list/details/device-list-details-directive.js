@@ -70,15 +70,6 @@ module.exports = function DeviceListDetailsDirective(
             kickDevice(device)
             e.preventDefault()
           }
-          else if (!device.using) {
-            var xmlHttp = new XMLHttpRequest()
-            xmlHttp.open('GET', '/api/v1/user/isUserAllowedToUseAdditionalDevice/', false) // false for synchronous request
-            xmlHttp.send(null)
-            let isAllowed = angular.fromJson(xmlHttp.responseText).isAllowed
-            if (!isAllowed) {
-              e.preventDefault()
-            }
-          }
         }
       }
 
