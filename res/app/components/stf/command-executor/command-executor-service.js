@@ -4,7 +4,7 @@ module.exports = function CommandExecutorServiceFactory(
 ) {
   var CommandExecutorService = {}
 
-  // Depricated
+  // Deprecated
   CommandExecutorService.executeDroidMateByGradle = function(params) {
     socket.emit('command.execute.droidmate.gradle', params)
   }

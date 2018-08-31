@@ -26,12 +26,14 @@ module.exports = function UserGroupsServiceFactory(
   }
 
   socket.on('group.user.group.added', function(group) {
+    $rootScope.$broadcast('group.user.group.added', group)
     $rootScope.$broadcast('group.user.group.updated', group)
     $rootScope.$broadcast('group.user.group.user.updated', group)
     $rootScope.$apply()
   })
 
   socket.on('group.user.group.removed', function(group) {
+    $rootScope.$broadcast('group.user.group.removed', group)
     $rootScope.$broadcast('group.user.group.updated', group)
     $rootScope.$broadcast('group.user.group.user.updated', group)
     $rootScope.$apply()
@@ -84,12 +86,11 @@ module.exports = function UserGroupsServiceFactory(
     // contained inside the group
     let filteredUsers = []
 
-    for (var i = 0; i < $rootScope.users.length; i++) {
-      var user = $rootScope.users[i]
+    $rootScope.users.forEach(function(user) {
       if (group.userEmails.indexOf(user.email) === -1) {
         filteredUsers.push(user)
       }
-    }
+    })
 
     return filteredUsers
   }
