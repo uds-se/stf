@@ -116,8 +116,11 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
       $scope.selectorsResetEvery,
       false,
       $scope.selectorsResetEveryCB))
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-resetEvery',
+    parameterBuilder.addParameter(new ParameterOptional('Selectors-stopOnExhaustion',
       $scope.selectorsStopOnExhaustionCB,
+      true))
+    parameterBuilder.addParameter(new ParameterOptional('Selectors-dfs',
+      $scope.selectorsDfsCB,
       true))
     //////////////////////////////// Core
     parameterBuilder.addParameter(new ParameterOptional('Core-logLevel',
@@ -129,9 +132,6 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
       $scope.apiMonitorServerMonitorSocketTimeout,
       false,
       $scope.apiMonitorServerMonitorSocketTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('ApiMonitorServer-monitorUseLegacyStream',
-      $scope.apiMonitorServerMonitorUseLegacyStreamCB,
-      true))
     //////////////////////////////// ExecutionMode
     parameterBuilder.addParameter(new ParameterOptional('ExecutionMode-inline',
       $scope.executionModeInlineCB,
@@ -179,42 +179,24 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
       $scope.deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays,
       false,
       $scope.deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-clearPackageRetryAttempts',
-      $scope.deviceCommunicationClearPackageRetryAttempts,
-      false,
-      $scope.deviceCommunicationClearPackageRetryAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-clearPackageRetryDelay',
-      $scope.deviceCommunicationClearPackageRetryDelay,
-      false,
-      $scope.deviceCommunicationClearPackageRetryDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-closeANRAttempts',
-      $scope.deviceCommunicationCloseANRAttempts,
-      false,
-      $scope.deviceCommunicationCloseANRAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-closeANRDelay',
-      $scope.deviceCommunicationCloseANRDelay,
-      false,
-      $scope.deviceCommunicationCloseANRDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-getValidGuiSnapshotRetryAttempts',
-      $scope.deviceCommunicationGetValidGuiSnapshotRetryAttempts,
-      false,
-      $scope.deviceCommunicationGetValidGuiSnapshotRetryAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-getValidGuiSnapshotRetryDelay',
-      $scope.deviceCommunicationGetValidGuiSnapshotRetryDelay,
-      false,
-      $scope.deviceCommunicationGetValidGuiSnapshotRetryDelayCB))
     parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-stopAppRetryAttempts',
       $scope.deviceCommunicationStopAppRetryAttempts,
-      false,
-      $scope.deviceCommunicationStopAppRetryAttemptsCB))
+      false))
     parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-stopAppSuccessCheckDelay',
       $scope.deviceCommunicationStopAppSuccessCheckDelay,
-      false,
-      $scope.deviceCommunicationStopAppSuccessCheckDelayCB))
+      false))
     parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-waitForCanRebootDelay',
       $scope.deviceCommunicationWaitForCanRebootDelay,
       false,
       $scope.deviceCommunicationWaitForCanRebootDelayCB))
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-deviceOperationAttempts',
+      $scope.deviceCommunicationDeviceOperationAttempts,
+      false,
+      $scope.deviceCommunicationDeviceOperationAttemptsCB))
+    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-deviceOperationDelay',
+      $scope.deviceCommunicationDeviceOperationDelay,
+      false,
+      $scope.deviceCommunicationDeviceOperationDelayCB))
     parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-waitForDevice',
       $scope.deviceCommunicationWaitForDeviceCB,
       true))
@@ -270,15 +252,31 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     parameterBuilder.addParameter(new ParameterOptional('Strategies-denyRuntimeDialog',
       $scope.strategiesDenyRuntimeDialogCB,
       true))
+    parameterBuilder.addParameter(new ParameterOptional('Strategies-dfs',
+      $scope.strategiesDfsCB,
+      true))
+    parameterBuilder.addParameter(new ParameterOptional('Strategies-rotateUI',
+      $scope.strategiesRotateUICB,
+      true))
+    parameterBuilder.addParameter(new ParameterOptional('Strategies-minimizeMaximize',
+      $scope.strategiesMinimizeMaximizeCB,
+      true))
+    parameterBuilder.addParameter(new ParameterOptional('Strategies-Parameters-uiRotation',
+      $scope.strategiesParametersUiRotationCB,
+      true))
     //////////////////////////////// UiAutomatorServer
     parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-startTimeout',
       $scope.uiAutomatorServerStartTimeout,
       false,
-      $scope.uiAutomatorServerStartTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-startQueryDelay',
-      $scope.uiAutomatorServerStartQueryDelay,
+      $scope.uiAutomatorServerWaitForIdleTimeoutCB))
+    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-waitForIdleTimeout',
+      $scope.uiAutomatorServerWaitForIdleTimeout,
       false,
       $scope.uiAutomatorServerStartQueryDelayCB))
+    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-waitForInteractableTimeout',
+      $scope.uiAutomatorServerWaitForInteractableTimeout,
+      false,
+      $scope.uiAutomatorServerWaitForInteractableTimeoutCB))
     parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-socketTimeout',
       $scope.uiAutomatorServerSocketTimeout,
       false,
@@ -294,7 +292,7 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     // TODO put the outputDir into the backend
     outputDir = apkDir.endsWith('/') ? apkDir + 'output/' : apkDir + '/output/'
     // DroidMate should store all the output here
-    parameterBuilder.addParameter(new ParameterMandatory('Output-droidmateOutputDirPath',
+    parameterBuilder.addParameter(new ParameterMandatory('Output-outputDir',
       outputDir,
       false))
 
@@ -316,11 +314,12 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     $scope.selectorsPressBackProbability = 0.05
     $scope.selectorsWidgetIndexes = -1
     $scope.selectorsResetEvery = 100
+    $scope.selectorsStopOnExhaustionCB = false
+    $scope.selectorsDfsCB = false
     //////////////////////////////// Core
     $scope.coreLogLevel = 'debug'
     //////////////////////////////// ApiMonitorServer
     $scope.apiMonitorServerMonitorSocketTimeout = 60000 // ms
-    $scope.apiMonitorServerMonitorUseLegacyStreamCB = false
     $scope.apiMonitorServerBasePort = 59701
     //////////////////////////////// ExecutionMode
     $scope.executionModeInlineCB = false
@@ -339,15 +338,11 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     $scope.deviceCommunicationCheckDeviceAvailableAfterRebootAttempts = 2
     $scope.deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay = 60000
     $scope.deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays = 10000
-    $scope.deviceCommunicationClearPackageRetryAttempts = 2
-    $scope.deviceCommunicationClearPackageRetryDelay = 1000
-    $scope.deviceCommunicationCloseANRAttempts = 2
-    $scope.deviceCommunicationCloseANRDelay = 1000
-    $scope.deviceCommunicationGetValidGuiSnapshotRetryAttempts = 4
-    $scope.deviceCommunicationGetValidGuiSnapshotRetryDelay = 4000
     $scope.deviceCommunicationStopAppRetryAttempts = 4
     $scope.deviceCommunicationStopAppSuccessCheckDelay = 5000
     $scope.deviceCommunicationWaitForCanRebootDelay = 30000
+    $scope.deviceCommunicationDeviceOperationAttempts = 2
+    $scope.deviceCommunicationDeviceOperationDelay = 1000
     $scope.deviceCommunicationWaitForDeviceCB = false
     //////////////////////////////// Exploration
     $scope.explorationDeviceIndex = 0
@@ -364,10 +359,16 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
     $scope.strategiesFitnessProportionateCB = false
     $scope.strategiesAllowRuntimeDialogCB = true
     $scope.strategiesDenyRuntimeDialogCB = false
+    $scope.strategiesDfsCB = false
+    $scope.strategiesRotateUICB = false
+    $scope.strategiesMinimizeMaximizeCB = false
+    //////////////////////////////// Strategies-Parameters
+    $scope.strategiesParametersUiRotationCB = false
     //////////////////////////////// Report
     //////////////////////////////// UiAutomatorServer
     $scope.uiAutomatorServerStartTimeout = 20000 // ms
-    $scope.uiAutomatorServerStartQueryDelay = 2000
+    $scope.uiAutomatorServerWaitForIdleTimeout = 200
+    $scope.uiAutomatorServerWaitForInteractableTimeout = 500
     $scope.uiAutomatorServerSocketTimeout = 45000
   }
 
