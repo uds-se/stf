@@ -34,21 +34,6 @@ class ParameterMandatory extends Parameter {
 }
 
 /**
- * ParameterOptional
- */
-class ParameterOptional extends Parameter {
-  constructor(parameterName, parameterValue, flag, optionalCheckbox) {
-    super(parameterName, parameterValue, flag)
-    this.optionalCheckbox = optionalCheckbox
-  }
-
-  isParameterUsed() {
-    return (typeof this.optionalCheckbox !== 'undefined' && this.optionalCheckbox === true)
-      || (typeof this.parameterValue !== 'undefined' && this.parameterValue !== null)
-  }
-}
-
-/**
  * ParameterBuilder
  */
 class ParameterBuilder {
@@ -95,192 +80,171 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
 
     //////////////////////////////// Selectors
     // Special parameters: One of the following parameters is required: selectorsActionLimit, selectorsTimeLimit.
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-actionLimit',
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-actionLimit',
       $scope.selectorsActionLimit,
       false))
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-timeLimit',
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-timeLimit',
       $scope.selectorsTimeLimit,
       false))
     parameterBuilder.addParameter(new ParameterMandatory('Selectors-randomSeed',
       $scope.selectorsRandomSeed,
       false))
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-pressBackProbability',
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-pressBackProbability',
       $scope.selectorsPressBackProbability,
-      false,
-      $scope.selectorsPressBackProbabilityCB))
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-widgetIndexes',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-widgetIndexes',
       $scope.selectorsWidgetIndexes,
-      false,
-      $scope.selectorsWidgetIndexesCB))
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-resetEvery',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-resetEvery',
       $scope.selectorsResetEvery,
-      false,
-      $scope.selectorsResetEveryCB))
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-stopOnExhaustion',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-stopOnExhaustion',
       $scope.selectorsStopOnExhaustionCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Selectors-dfs',
+    parameterBuilder.addParameter(new ParameterMandatory('Selectors-dfs',
       $scope.selectorsDfsCB,
       true))
     //////////////////////////////// Core
-    parameterBuilder.addParameter(new ParameterOptional('Core-logLevel',
+    parameterBuilder.addParameter(new ParameterMandatory('Core-logLevel',
       $scope.coreLogLevel,
-      false,
-      $scope.coreLogLevelCB))
+      false))
     //////////////////////////////// ApiMonitorServer
-    parameterBuilder.addParameter(new ParameterOptional('ApiMonitorServer-monitorSocketTimeout',
+    parameterBuilder.addParameter(new ParameterMandatory('ApiMonitorServer-monitorSocketTimeout',
       $scope.apiMonitorServerMonitorSocketTimeout,
-      false,
-      $scope.apiMonitorServerMonitorSocketTimeoutCB))
+      false))
     //////////////////////////////// ExecutionMode
-    parameterBuilder.addParameter(new ParameterOptional('ExecutionMode-inline',
+    parameterBuilder.addParameter(new ParameterMandatory('ExecutionMode-inline',
       $scope.executionModeInlineCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('ExecutionMode-explore',
+    parameterBuilder.addParameter(new ParameterMandatory('ExecutionMode-explore',
       $scope.executionModeExploreCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('ExecutionMode-coverage',
+    parameterBuilder.addParameter(new ParameterMandatory('ExecutionMode-coverage',
       $scope.executionModeCoverageCB,
       true))
     //////////////////////////////// Deploy
-    parameterBuilder.addParameter(new ParameterOptional('Deploy-installApk',
+    parameterBuilder.addParameter(new ParameterMandatory('Deploy-installApk',
       $scope.deployInstallApkCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Deploy-installAux',
+    parameterBuilder.addParameter(new ParameterMandatory('Deploy-installAux',
       $scope.deployInstallAuxCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Deploy-uninstallApk',
+    parameterBuilder.addParameter(new ParameterMandatory('Deploy-uninstallApk',
       $scope.deployUninstallApkCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Deploy-uninstallAux',
+    parameterBuilder.addParameter(new ParameterMandatory('Deploy-uninstallAux',
       $scope.deployUninstallAuxCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Deploy-deployRawApks',
+    parameterBuilder.addParameter(new ParameterMandatory('Deploy-deployRawApks',
       $scope.deployDeployRawApksCB,
       true))
     //////////////////////////////// DeviceCommunication
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkAppIsRunningRetryAttempts',
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-checkAppIsRunningRetryAttempts',
       $scope.deviceCommunicationCheckAppIsRunningRetryAttempts,
-      false,
-      $scope.deviceCommunicationCheckAppIsRunningRetryAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkAppIsRunningRetryDelay',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-checkAppIsRunningRetryDelay',
       $scope.deviceCommunicationCheckAppIsRunningRetryDelay,
-      false,
-      $scope.deviceCommunicationCheckAppIsRunningRetryDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkDeviceAvailableAfterRebootAttempts',
-      $scope.checkDeviceAvailableAfterRebootAttempts,
-      false,
-      $scope.deviceCommunicationCheckDeviceAvailableAfterRebootAttempts))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-checkDeviceAvailableAfterRebootAttempts',
+      $scope.deviceCommunicationCheckDeviceAvailableAfterRebootAttempts,
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay',
       $scope.deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay,
-      false,
-      $scope.deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays',
       $scope.deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays,
-      false,
-      $scope.deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-stopAppRetryAttempts',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-stopAppRetryAttempts',
       $scope.deviceCommunicationStopAppRetryAttempts,
       false))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-stopAppSuccessCheckDelay',
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-stopAppSuccessCheckDelay',
       $scope.deviceCommunicationStopAppSuccessCheckDelay,
       false))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-waitForCanRebootDelay',
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-waitForCanRebootDelay',
       $scope.deviceCommunicationWaitForCanRebootDelay,
-      false,
-      $scope.deviceCommunicationWaitForCanRebootDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-deviceOperationAttempts',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-deviceOperationAttempts',
       $scope.deviceCommunicationDeviceOperationAttempts,
-      false,
-      $scope.deviceCommunicationDeviceOperationAttemptsCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-deviceOperationDelay',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-deviceOperationDelay',
       $scope.deviceCommunicationDeviceOperationDelay,
-      false,
-      $scope.deviceCommunicationDeviceOperationDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('DeviceCommunication-waitForDevice',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('DeviceCommunication-waitForDevice',
       $scope.deviceCommunicationWaitForDeviceCB,
       true))
     //////////////////////////////// Exploration
     parameterBuilder.addParameter(new ParameterMandatory('Exploration-apksDir', apkDir, false))
-    parameterBuilder.addParameter(new ParameterOptional('Exploration-deviceIndex',
+    parameterBuilder.addParameter(new ParameterMandatory('Exploration-deviceIndex',
       $scope.explorationDeviceIndex,
-      false,
-      $scope.explorationDeviceIndexCB))
-    parameterBuilder.addParameter(new ParameterOptional('Exploration-runOnNotInlined',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('Exploration-runOnNotInlined',
       $scope.explorationRunOnNotInlinedCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Exploration-launchActivityDelay',
+    parameterBuilder.addParameter(new ParameterMandatory('Exploration-launchActivityDelay',
       $scope.explorationLaunchActivityDelay,
-      false,
-      $scope.explorationLaunchActivityDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('Exploration-launchActivityTimeout',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('Exploration-launchActivityTimeout',
       $scope.explorationLaunchActivityTimeout,
-      false,
-      $scope.explorationLaunchActivityTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('Exploration-apiVersion',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('Exploration-apiVersion',
       $scope.explorationApiVersion,
-      false,
-      $scope.explorationApiVersionCB))
+      false))
     //////////////////////////////// Strategies
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-reset',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-reset',
       $scope.strategiesResetCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-explore',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-explore',
       $scope.strategiesExploreCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-terminate',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-terminate',
       $scope.strategiesTerminateCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-back',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-back',
       $scope.strategiesBackCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-modelBased',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-modelBased',
       $scope.strategiesModelBasedCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-fitnessProportionate',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-fitnessProportionate',
       $scope.strategiesFitnessProportionateCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-modelBased',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-modelBased',
       $scope.strategiesModelBasedCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-fitnessProportionate',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-fitnessProportionate',
       $scope.strategiesFitnessProportionateCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-allowRuntimeDialog',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-allowRuntimeDialog',
       $scope.strategiesAllowRuntimeDialogCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-denyRuntimeDialog',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-denyRuntimeDialog',
       $scope.strategiesDenyRuntimeDialogCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-dfs',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-dfs',
       $scope.strategiesDfsCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-rotateUI',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-rotateUI',
       $scope.strategiesRotateUICB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-minimizeMaximize',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-minimizeMaximize',
       $scope.strategiesMinimizeMaximizeCB,
       true))
-    parameterBuilder.addParameter(new ParameterOptional('Strategies-Parameters-uiRotation',
+    parameterBuilder.addParameter(new ParameterMandatory('Strategies-Parameters-uiRotation',
       $scope.strategiesParametersUiRotationCB,
       true))
     //////////////////////////////// UiAutomatorServer
-    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-startTimeout',
+    parameterBuilder.addParameter(new ParameterMandatory('UiAutomatorServer-startTimeout',
       $scope.uiAutomatorServerStartTimeout,
-      false,
-      $scope.uiAutomatorServerWaitForIdleTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-waitForIdleTimeout',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('UiAutomatorServer-waitForIdleTimeout',
       $scope.uiAutomatorServerWaitForIdleTimeout,
-      false,
-      $scope.uiAutomatorServerStartQueryDelayCB))
-    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-waitForInteractableTimeout',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('UiAutomatorServer-waitForInteractableTimeout',
       $scope.uiAutomatorServerWaitForInteractableTimeout,
-      false,
-      $scope.uiAutomatorServerWaitForInteractableTimeoutCB))
-    parameterBuilder.addParameter(new ParameterOptional('UiAutomatorServer-socketTimeout',
+      false))
+    parameterBuilder.addParameter(new ParameterMandatory('UiAutomatorServer-socketTimeout',
       $scope.uiAutomatorServerSocketTimeout,
-      false,
-      $scope.uiAutomatorServerSocketTimeoutCB))
+      false))
 
 
 
@@ -310,6 +274,7 @@ module.exports = function DroidMateCtrl($scope, CommandExecutorService, StorageS
   function setup() {
     //////////////////////////////// Selectors
     $scope.selectorsActionLimit = 30
+    $scope.selectorsTimeLimit = 0
     $scope.selectorsRandomSeed = 0
     $scope.selectorsPressBackProbability = 0.05
     $scope.selectorsWidgetIndexes = -1

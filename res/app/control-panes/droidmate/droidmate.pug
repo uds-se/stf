@@ -3,15 +3,11 @@
     stacked-icon(icon='fa-android', color='color-green')
     span(translate) DroidMate Testing
   .widget-content
-    // TODO think about why disabling parameters like Exploration-launchActivityDelay and not just remove the checkbox
-    // and display the defualt value
     table.table.table-hover.table-condensed.dataTable.ng-table
       thead
         tr
           th
             span(translate) Parameter Name
-          th
-            span(translate) Use Parameter
           th
             span(translate) Parameter Value
           th
@@ -24,35 +20,43 @@
               span Selectors
             td
             td
-            td
         // Selectors-actionLimit
         tr
           td
             span Selectors-actionLimit
           td
-            span Required
+            input(type='number',
+                  class="spanparameter",
+                  name='selectorsActionLimit',
+                  min="1",
+                  step="1",
+                  ng-model='selectorsActionLimit')
           td
-            input(type='number', name='selectorsActionLimit', min="1", step="1", ng-model='selectorsActionLimit', style='width:10em')
-          td
-            span How many actions the GUI exploration strategy can conduct before terminating. One of the following parameters is required: actionLimit, timeLimit.
+            span How many actions the GUI exploration strategy can conduct before terminating.
         // Selectors-timeLimit
         tr
           td
             span Selectors-timeLimit
           td
-            span Required
+            input(type='number',
+                  class="spanparameter",
+                  name='selectorsTimeLimit',
+                  min="0",
+                  step="1",
+                  ng-model='selectorsTimeLimit')
           td
-            input(type='number', name='selectorsTimeLimit', min="1", step="1", ng-model='selectorsTimeLimit', style='width:10em')
-          td
-            span How long the exploration of any given apk should take, in seconds. If set to 0, instead actionLimit will be used. One of the following parameters is required: actionLimit, timeLimit.
+            span How long the exploration of any given apk should take, in seconds. If set to 0, instead actionLimit will be used.
         // Selectors-randomSeed
         tr
           td
             span Selectors-randomSeed
           td
-            span Required
-          td
-            input(type='number', name='selectorsRandomSeed', min="-1", step="1", ng-model='selectorsRandomSeed', style='width:10em')
+            input(type='number',
+                  class="spanparameter",
+                  name='selectorsRandomSeed',
+                  min="-1",
+                  step="1",
+                  ng-model='selectorsRandomSeed')
           td
             span The seed for a random generator used by a random-clicking GUI exploration strategy. If null, a seed will be randomized.
         // Selectors-pressBackProbability
@@ -60,15 +64,12 @@
           td
             span Selectors-pressBackProbability
           td
-            input(type='checkbox', name='selectorsPressBackProbabilityCB', ng-model='selectorsPressBackProbabilityCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='selectorsPressBackProbability',
                   min="0",
                   step="0.01",
-                  ng-model='selectorsPressBackProbability',
-                  ng-disabled="disabledIfCheckboxFalse(selectorsPressBackProbabilityCB)")
+                  ng-model='selectorsPressBackProbability')
           td
               span Probability of randomly pressing the back button while exploring. Set to 0 to disable the press back strategy.
         // Selectors-widgetIndexes
@@ -76,13 +77,10 @@
           td
             span Selectors-widgetIndexes
           td
-            input(type='checkbox', name='selectorsWidgetIndexesCB', ng-model='selectorsWidgetIndexesCB', value=0, checked='')
-          td
             input(type='text',
                   class="spanparameter",
                   name='selectorsWidgetIndexes',
-                  ng-model='selectorsWidgetIndexes',
-                  ng-disabled="disabledIfCheckboxFalse(selectorsWidgetIndexesCB)")
+                  ng-model='selectorsWidgetIndexes')
           // Use unicode: &#60; = <; &#62; = >;
           td
             span Makes the exploration strategy to choose widgets to click that have the indexes as provided by this parameter, in sequence. The format is: [&#60;first widget index&#62;, &#60;second widget index&#62;,...&#60;nth widget index&#62;], starting indexing at 0. Example: [0,7,3]
@@ -91,23 +89,18 @@
           td
             span Selectors-resetEvery
           td
-            input(type='checkbox', name='selectorsResetEveryCB', ng-model='selectorsResetEveryCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='selectorsResetEvery',
                   min="0",
                   step="1",
-                  ng-model='selectorsResetEvery',
-                  ng-disabled="disabledIfCheckboxFalse(selectorsResetEveryCB)")
+                  ng-model='selectorsResetEvery')
           td
             span Number of actions to automatically reset the exploration from its initial activity. Set to 0 to disable.
         // Selectors-stopOnExhaustion
         tr
           td
             span Selectors-stopOnExhaustion
-          td
-            span
           td
             input(type='checkbox', name='selectorsStopOnExhaustionCB', value='1', ng-model='selectorsStopOnExhaustionCB')
           td
@@ -116,8 +109,6 @@
         tr
           td
             span Selectors-dfs
-          td
-            span
           td
             input(type='checkbox', name='selectorsDfsCB', value='1', ng-model='selectorsDfsCB')
           td
@@ -135,13 +126,10 @@
           td
             span Core-logLevel
           td
-            input(type='checkbox', name='coreLogLevelCB', ng-model='coreLogLevelCB', value=0, checked='')
-          td
             input(type='text',
                   class="spanparameter",
                   name='coreLogLevel',
-                  ng-model='coreLogLevel',
-                  ng-disabled="disabledIfCheckboxFalse(coreLogLevelCB)")
+                  ng-model='coreLogLevel')
           td
             span Logging level of the entirety of application. Possible values, comma separated: info, debug, trace, warn, error.
         //////////////////////////////// ApiMonitorServer
@@ -151,21 +139,17 @@
               span ApiMonitorServer
             td
             td
-            td
         // ApiMonitorServer-monitorSocketTimeout
         tr
           td
             span ApiMonitorServer-monitorSocketTimeout
-          td
-            input(type='checkbox', name='apiMonitorServerMonitorSocketTimeoutCB', ng-model='apiMonitorServerMonitorSocketTimeoutCB', value=0, checked='')
           td
             input(type='number',
                   class="spanparameter",
                   name='apiMonitorServerMonitorSocketTimeout',
                   min="0",
                   step="1",
-                  ng-model='apiMonitorServerMonitorSocketTimeout',
-                  ng-disabled="disabledIfCheckboxFalse(apiMonitorServerMonitorSocketTimeoutCB)")
+                  ng-model='apiMonitorServerMonitorSocketTimeout')
           td
             span Socket timeout to communicate with the API monitor service.
         // ApiMonitorServer-basePort
@@ -173,15 +157,12 @@
           td
             span ApiMonitorServer-basePort
           td
-            input(type='checkbox', name='apiMonitorServerBasePortCB', ng-model='apiMonitorServerBasePortCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='apiMonitorServerBasePort',
                   min="0",
                   step="1",
-                  ng-model='apiMonitorServerBasePort',
-                  ng-disabled="disabledIfCheckboxFalse(apiMonitorServerBasePortCB)")
+                  ng-model='apiMonitorServerBasePort')
           td
             span The base port for the communication with the the API monitor service. DroidMate communicates over this base port + device index.
         //////////////////////////////// ExecutionMode
@@ -191,14 +172,12 @@
               span ExecutionMode
             td
             td
-            td
+              span An execution mode can only be exclusively chosen.
         // Use a radio button group here, because the execution modes are only exclusively usable
         // ExecutionMode-inline
         tr
           td
             span ExecutionMode-inline
-          td
-            span
           td
             input(type='radio', name='executionMode', value='1', ng-model='executionModeInlineCB')
           td
@@ -219,8 +198,6 @@
           td
             span ExecutionMode-explore
           td
-            span
-          td
             input(type='radio', name='executionMode', value='1', ng-model='executionModeExploreCB')
           td
             span Run DroidMate in exploration mode.
@@ -228,8 +205,6 @@
         tr
           td
             span ExecutionMode-coverage
-          td
-            span
           td
             input(type='radio', name='executionMode', value='1', ng-model='executionModeCoverageCB')
           td
@@ -241,13 +216,10 @@
               span Deploy
             td
             td
-            td
         // Deploy-installApk
         tr
           td
             span Deploy-installApk
-          td
-            span
           td
             input(type='checkbox', name='deployInstallApkCB', value='1', ng-model='deployInstallApkCB')
           td
@@ -257,8 +229,6 @@
           td
             span Deploy-installAux
           td
-            span
-          td
             input(type='checkbox', name='deployInstallAuxCB', value='1', ng-model='deployInstallAuxCB')
           td
             span Reinstall the auxiliary files (UIAutomator and Monitor) to the device. If the auxiliary files are not previously installed the exploration will fail.
@@ -267,8 +237,6 @@
           td
             span Deploy-uninstallApk
           td
-            span
-          td
             input(type='checkbox', name='deployUninstallApkCB', value='1', ng-model='deployUninstallApkCB')
           td
             span Uninstall the APK after the exploration.
@@ -276,8 +244,6 @@
         tr
           td
             span Deploy-uninstallAux
-          td
-            span
           td
             input(type='checkbox', name='deployUninstallAuxCB', value='1', ng-model='deployUninstallAuxCB')
           td
@@ -298,8 +264,6 @@
           td
             span Deploy-deployRawApks
           td
-            span
-          td
             input(type='checkbox', name='deployDeployRawApksCB', value='1', ng-model='deployDeployRawApksCB')
           td
             span Deploys apks to device in 'raw' form, that is, without instrumenting them. Will deploy them raw even if instrumented version is available from last run.
@@ -310,21 +274,17 @@
               span DeviceCommunication
             td
             td
-            td
         // DeviceCommunication-checkAppIsRunningRetryAttempts
         tr
           td
             span DeviceCommunication-checkAppIsRunningRetryAttempts
-          td
-            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', ng-model='deviceCommunicationCheckAppIsRunningRetryAttemptsCB', value=0, checked='')
           td
             input(type='number',
                   class="spanparameter",
                   name='deviceCommunicationCheckAppIsRunningRetryAttempts',
                   min="0",
                   step="1",
-                  ng-model='deviceCommunicationCheckAppIsRunningRetryAttempts',
-                  ng-disabled="disabledIfCheckboxFalse(deviceCommunicationCheckAppIsRunningRetryAttemptsCB)")
+                  ng-model='deviceCommunicationCheckAppIsRunningRetryAttempts')
           td
             span Number of attempts to check if an app is running on the device.
         // DeviceCommunication-checkAppIsRunningRetryDelay
@@ -332,15 +292,12 @@
           td
             span DeviceCommunication-checkAppIsRunningRetryDelay
           td
-            input(type='checkbox', name='deviceCommunicationCheckAppIsRunningRetryDelayCB', ng-model='deviceCommunicationCheckAppIsRunningRetryDelayCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='deviceCommunicationCheckAppIsRunningRetryDelay',
                   min="0",
                   step="1",
-                  ng-model='deviceCommunicationCheckAppIsRunningRetryDelay',
-                  ng-disabled="disabledIfCheckboxFalse(deviceCommunicationCheckAppIsRunningRetryDelayCB)")
+                  ng-model='deviceCommunicationCheckAppIsRunningRetryDelay')
           td
             span Timeout for each attempt to check if an app is running on the device in milliseconds.
         // DeviceCommunication-checkDeviceAvailableAfterRebootAttempts
@@ -348,15 +305,12 @@
           td
             span DeviceCommunication-checkDeviceAvailableAfterRebootAttempts
           td
-            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='deviceCommunicationCheckDeviceAvailableAfterRebootAttempts',
                   min="0",
                   step="1",
-                  ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttempts',
-                  ng-disabled="disabledIfCheckboxFalse(deviceCommunicationCheckDeviceAvailableAfterRebootAttemptsCB)")
+                  ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootAttempts')
           td
             span Determines how often DroidMate checks if a device is available after a reboot.
         // DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay
@@ -364,15 +318,12 @@
           td
             span DeviceCommunication-checkDeviceAvailableAfterRebootFirstDelay
           td
-            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay',
                   min="0",
                   step="1",
-                  ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay',
-                  ng-disabled="disabledIfCheckboxFalse(deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelayCB)")
+                  ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootFirstDelay')
           td
             span The first delay after a device rebooted, before its availability will be checked.
         // DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays
@@ -380,15 +331,12 @@
           td
             span DeviceCommunication-checkDeviceAvailableAfterRebootLaterDelays
           td
-            input(type='checkbox', name='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays',
                   min="0",
                   step="1",
-                  ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays',
-                  ng-disabled="disabledIfCheckboxFalse(deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelaysCB)")
+                  ng-model='deviceCommunicationCheckDeviceAvailableAfterRebootLaterDelays')
           td
             span The non-first delay after a device rebooted, before its availability will be checked.
         // DeviceCommunication-stopAppRetryAttempts
@@ -396,9 +344,12 @@
           td
             span DeviceCommunication-stopAppRetryAttempts
           td
-            span TODO
-          td
-            input(type='number', name='deviceCommunicationStopAppRetryAttempts', min="0", step="1", ng-model='deviceCommunicationStopAppRetryAttempts', style='width:10em')
+            input(type='number',
+                  class="spanparameter",
+                  name='deviceCommunicationStopAppRetryAttempts',
+                  min="0",
+                  step="1",
+                  ng-model='deviceCommunicationStopAppRetryAttempts')
           td
             span Number of attempts to close an 'application has stopped' dialog.
         // DeviceCommunication-stopAppSuccessCheckDelay
@@ -406,9 +357,12 @@
           td
             span DeviceCommunication-stopAppSuccessCheckDelay
           td
-            span TODO
-          td
-            input(type='number', name='deviceCommunicationStopAppSuccessCheckDelay', min="0", step="1", ng-model='deviceCommunicationStopAppSuccessCheckDelay', style='width:10em')
+            input(type='number',
+                  class="spanparameter",
+                  name='deviceCommunicationStopAppSuccessCheckDelay',
+                  min="0",
+                  step="1",
+                  ng-model='deviceCommunicationStopAppSuccessCheckDelay')
           td
             span Delay after each failed attempt close an 'application has stopped' dialog.
         // DeviceCommunication-waitForCanRebootDelay
@@ -416,15 +370,12 @@
           td
             span DeviceCommunication-waitForCanRebootDelay
           td
-            input(type='checkbox', name='deviceCommunicationWaitForCanRebootDelayCB', ng-model='deviceCommunicationWaitForCanRebootDelayCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='deviceCommunicationWaitForCanRebootDelay',
                   min="0",
                   step="1",
-                  ng-model='deviceCommunicationWaitForCanRebootDelay',
-                  ng-disabled="disabledIfCheckboxFalse(deviceCommunicationWaitForCanRebootDelayCB)")
+                  ng-model='deviceCommunicationWaitForCanRebootDelay')
           td
             span Delay (in milliseconds) after an attempt was made to reboot a device, before.
         // DeviceCommunication-deviceOperationAttempts
@@ -432,15 +383,12 @@
           td
             span DeviceCommunication-deviceOperationAttempts
           td
-            input(type='checkbox', name='deviceCommunicationDeviceOperationAttemptsCB', ng-model='deviceCommunicationDeviceOperationAttemptsCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='deviceCommunicationDeviceOperationAttempts',
                   min="0",
                   step="1",
-                  ng-model='deviceCommunicationDeviceOperationAttempts',
-                  ng-disabled="disabledIfCheckboxFalse(deviceCommunicationDeviceOperationAttemptsCB)")
+                  ng-model='deviceCommunicationDeviceOperationAttempts')
           td
             span Number of attempts to retry other failed device operations.
         // DeviceCommunication-deviceOperationDelay
@@ -448,23 +396,18 @@
           td
             span DeviceCommunication-deviceOperationDelay
           td
-            input(type='checkbox', name='deviceCommunicationDeviceOperationDelayCB', ng-model='deviceCommunicationDeviceOperationDelayCB', value=0, checked='')
-          td
             input(type='number',
-            class="spanparameter",
-            name='deviceCommunicationDeviceOperationDelay',
-            min="0",
-            step="1",
-            ng-model='deviceCommunicationDeviceOperationDelay',
-            ng-disabled="disabledIfCheckboxFalse(deviceCommunicationDeviceOperationDelayCB)")
+                  class="spanparameter",
+                  name='deviceCommunicationDeviceOperationDelay',
+                  min="0",
+                  step="1",
+                  ng-model='deviceCommunicationDeviceOperationDelay')
           td
             span Delay (in milliseconds) after an attempt was made to perform a device operation, before retrying again.
         // DeviceCommunication-waitForDevice
         tr
           td
             span DeviceCommunication-waitForDevice
-          td
-            span
           td
             input(type='checkbox', name='deviceCommunicationWaitForDeviceCB', value='1', ng-model='deviceCommunicationWaitForDeviceCB')
           td
@@ -476,12 +419,9 @@
               span Exploration
             td
             td
-            td
         // TODO not available on the farm right now
         // Exploration-apksLimit
         //tr
-        //  td
-        //    input(type='checkbox', name='', ng-model='', value=0, checked='')
         //  td
         //    span Exploration-apksLimit
         //  td
@@ -491,8 +431,6 @@
         // TODO not available on the farm right now
         // Exploration-apkNames
         //tr
-        //  td
-        //    input(type='checkbox', name='', ng-model='', value=0, checked='')
         //  td
         //    span Exploration-apksLimit
         //  td
@@ -504,23 +442,18 @@
           td
             span Exploration-deviceIndex
           td
-            input(type='checkbox', name='explorationDeviceIndexCB', ng-model='explorationDeviceIndexCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='explorationDeviceIndex',
                   min="0",
                   step="0",
-                  ng-model='explorationDeviceIndex',
-                  ng-disabled="disabledIfCheckboxFalse(explorationDeviceIndexCB)")
+                  ng-model='explorationDeviceIndex')
           td
             span Index of the device to be used (from adb devices). Zero based.
         // Exploration-runOnNotInlined
         tr
           td
             span Exploration-runOnNotInlined
-          td
-            span
           td
             input(type='checkbox', name='explorationRunOnNotInlinedCB', value='1', ng-model='explorationRunOnNotInlinedCB')
           td
@@ -530,15 +463,12 @@
           td
             span Exploration-launchActivityDelay
           td
-            input(type='checkbox', name='explorationLaunchActivityDelayCB', ng-model='explorationLaunchActivityDelayCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='explorationLaunchActivityDelay',
                   min="0",
                   step="0",
-                  ng-model='explorationLaunchActivityDelay',
-                  ng-disabled="disabledIfCheckboxFalse(explorationLaunchActivityDelayCB)")
+                  ng-model='explorationLaunchActivityDelay')
           td
             span Delay (in milliseconds) to wait for the app to load before continuing the exploration after a reset (or exploration start).
         // Exploration-launchActivityTimeout
@@ -546,15 +476,12 @@
           td
             span Exploration-launchActivityTimeout
           td
-            input(type='checkbox', name='explorationLaunchActivityTimeoutCB', ng-model='explorationLaunchActivityTimeoutCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='explorationLaunchActivityTimeout',
                   min="0",
                   step="0",
-                  ng-model='explorationLaunchActivityTimeout',
-                  ng-disabled="disabledIfCheckboxFalse(explorationLaunchActivityTimeoutCB)")
+                  ng-model='explorationLaunchActivityTimeout')
           td
             span Maximum amount of time to be waited for an app to start after a reset in milliseconds.
         // Exploration-apiVersion
@@ -562,15 +489,12 @@
           td
             span Exploration-apiVersion
           td
-            input(type='checkbox', name='explorationApiVersionCB', ng-model='explorationApiVersionCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='explorationApiVersion',
                   min="0",
                   step="0",
-                  ng-model='explorationApiVersion',
-                  ng-disabled="disabledIfCheckboxFalse(explorationApiVersionCB)")
+                  ng-model='explorationApiVersion')
           td
             span Has to be set to the Android API version corresponding to the (virtual) devices on which DroidMate will run. Currently supported values: api23
         //////////////////////////////// Strategies
@@ -580,13 +504,10 @@
               span Strategies
             td
             td
-            td
         // Strategies-reset
         tr
           td
             span Strategies-reset
-          td
-            span
           td
             input(type='checkbox', name='strategiesResetCB', value='1', ng-model='strategiesResetCB')
           td
@@ -596,8 +517,6 @@
           td
             span Strategies-explore
           td
-            span
-          td
             input(type='checkbox', name='strategiesExploreCB', value='1', ng-model='strategiesExploreCB')
           td
             span Enables use of biased random exploration strategy.
@@ -605,8 +524,6 @@
         tr
           td
             span Strategies-terminate
-          td
-            span
           td
             input(type='checkbox', name='strategiesTerminateCB', value='1', ng-model='strategiesTerminateCB')
           td
@@ -616,8 +533,6 @@
           td
             span Strategies-back
           td
-            span
-          td
             input(type='checkbox', name='strategiesBackCB', value='1', ng-model='strategiesBackCB')
           td
             span Enables use of 'press back button' strategy.
@@ -625,8 +540,6 @@
         tr
           td
             span Strategies-modelBased
-          td
-            span
           td
             input(type='checkbox', name='strategiesModelBasedCB', value='1', ng-model='strategiesModelBasedCB')
           td
@@ -636,8 +549,6 @@
           td
             span Strategies-fitnessProportionate
           td
-            span
-          td
             input(type='checkbox', name='strategiesFitnessProportionateCB', value='1', ng-model='strategiesFitnessProportionateCB')
           td
             span Enables use of random exploration strategy using static model and fitness proportionate selection.
@@ -645,8 +556,6 @@
         tr
           td
             span Strategies-allowRuntimeDialog
-          td
-            span
           td
             input(type='checkbox', name='strategiesAllowRuntimeDialogCB', value='1', ng-model='strategiesAllowRuntimeDialogCB')
           td
@@ -656,8 +565,6 @@
           td
             span Strategies-denyRuntimeDialog
           td
-            span
-          td
             input(type='checkbox', name='strategiesDenyRuntimeDialogCB', value='1', ng-model='strategiesDenyRuntimeDialogCB')
           td
             span Enables use of strategy to always click 'Deny' on permission dialogs.
@@ -665,8 +572,6 @@
         tr
           td
             span Strategies-dfs
-          td
-            span
           td
             input(type='checkbox', name='strategiesDfsCB', value='1', ng-model='strategiesDfsCB')
           td
@@ -676,8 +581,6 @@
           td
             span Strategies-rotateUI
           td
-            span
-          td
             input(type='checkbox', name='strategiesRotateUICB', value='1', ng-model='strategiesRotateUICB')
           td
             span Enables use of Rotate UI strategy.
@@ -685,8 +588,6 @@
         tr
           td
             span Strategies-minimizeMaximize
-          td
-            span
           td
             input(type='checkbox', name='strategiesMinimizeMaximizeCB', value='1', ng-model='strategiesMinimizeMaximizeCB')
           td
@@ -696,16 +597,12 @@
           td
             span Strategies-Parameters-uiRotation
           td
-            span
-          td
             input(type='checkbox', name='strategiesParametersUiRotationCB', value='1', ng-model='strategiesParametersUiRotationCB')
           td
             span Value of the UI rotation for Rotate UI strategy. Valid values are: 0, 90, 180, 270. Other values will be rounded to one of these.
         // TODO not available on the farm right now
         // Strategies-playback
         //tr
-        //  td
-        //    span
         //  td
         //    span Strategies-playback
         //  td
@@ -722,21 +619,17 @@
               span UiAutomatorServer
             td
             td
-            td
         // UiAutomatorServer-startTimeout
         tr
           td
             span UiAutomatorServer-startTimeout
-          td
-            input(type='checkbox', name='uiAutomatorServerStartTimeoutCB', ng-model='uiAutomatorServerStartTimeoutCB', value=0, checked='')
           td
             input(type='number',
                   class="spanparameter",
                   name='uiAutomatorServerStartTimeout',
                   min="0",
                   step="1",
-                  ng-model='uiAutomatorServerStartTimeout',
-                  ng-disabled="disabledIfCheckboxFalse(uiAutomatorServerStartTimeoutCB)")
+                  ng-model='uiAutomatorServerStartTimeout')
           td
             span How long DroidMate should wait, in milliseconds, for message on logcat confirming that UiAutomatorDaemonServer has started on android (virtual) device.
         // UiAutomatorServer-waitForIdleTimeout
@@ -744,15 +637,12 @@
           td
             span UiAutomatorServer-waitForIdleTimeout
           td
-            input(type='checkbox', name='uiAutomatorServerWaitForIdleTimeoutCB', ng-model='uiAutomatorServerWaitForIdleTimeoutCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='uiAutomatorServerWaitForIdleTimeout',
                   min="0",
                   step="1",
-                  ng-model='uiAutomatorServerWaitForIdleTimeout',
-                  ng-disabled="disabledIfCheckboxFalse(uiAutomatorServerWaitForIdleTimeoutCB)")
+                  ng-model='uiAutomatorServerWaitForIdleTimeout')
           td
             span Timeout for a device to be idle an operation.
         // UiAutomatorServer-waitForInteractableTimeout
@@ -760,15 +650,12 @@
           td
             span UiAutomatorServer-waitForInteractableTimeout
           td
-            input(type='checkbox', name='uiAutomatorServerWaitForInteractableTimeoutCB', ng-model='uiAutomatorServerWaitForInteractableTimeoutCB', value=0, checked='')
-          td
             input(type='number',
-            class="spanparameter",
-            name='uiAutomatorServerWaitForInteractableTimeout',
-            min="0",
-            step="1",
-            ng-model='uiAutomatorServerWaitForInteractableTimeout',
-            ng-disabled="disabledIfCheckboxFalse(uiAutomatorServerWaitForInteractableTimeoutCB)")
+                  class="spanparameter",
+                  name='uiAutomatorServerWaitForInteractableTimeout',
+                  min="0",
+                  step="1",
+                  ng-model='uiAutomatorServerWaitForInteractableTimeout')
           td
             span Timeout for a widget to be available after an operation.
         // UiAutomatorServer-socketTimeout
@@ -776,15 +663,12 @@
           td
             span UiAutomatorServer-socketTimeout
           td
-            input(type='checkbox', name='uiAutomatorServerSocketTimeoutCB', ng-model='uiAutomatorServerSocketTimeoutCB', value=0, checked='')
-          td
             input(type='number',
                   class="spanparameter",
                   name='uiAutomatorServerSocketTimeout',
                   min="0",
                   step="1",
-                  ng-model='uiAutomatorServerSocketTimeout',
-                  ng-disabled="disabledIfCheckboxFalse(uiAutomatorServerSocketTimeoutCB)")
+                  ng-model='uiAutomatorServerSocketTimeout')
           td
             span Socket timeout to communicate with the UiDaemonServer.
 
