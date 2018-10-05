@@ -174,6 +174,7 @@ module.exports = function DeviceServiceFactory($rootScope, $http, socket, Enhanc
     , digest: false
     })
 
+    // TODO removing the old API completely?
     // Originally the path was '/api/v1/devices',
     // but we decided to only allow the user assigned
     // devices, therefore no general tracking of all
@@ -203,6 +204,21 @@ module.exports = function DeviceServiceFactory($rootScope, $http, socket, Enhanc
     return tracker
   }
 
+  deviceService.trackFiltered = function($scope, filterFunc) {
+    var tracker = new Tracker($scope, {
+      filter: filterFunc
+      , digest: true
+    })
+
+    oboe('/api/v1/user/devices')
+      .node('devices[*]', function(device) {
+        tracker.add(device)
+      })
+
+    return tracker
+  }
+
+  // TODO
   deviceService.load = function(serial) {
     return $http.get('/api/v1/devices/' + serial)
       .then(function(response) {
