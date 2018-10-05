@@ -33,12 +33,6 @@ module.exports =
         icon: 'fa-info color-orange',
         templateUrl: 'control-panes/info/info.pug',
         filters: ['native', 'web']
-      },
-      {
-        title: gettext('DroidMate'),
-        icon: 'fa-android color-green',
-        templateUrl: 'control-panes/droidmate/droidmate.pug',
-        filters: ['native', 'web']
       }
     ]
 

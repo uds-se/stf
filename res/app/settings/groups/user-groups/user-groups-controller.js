@@ -1,22 +1,18 @@
-module.exports = function UserGroupsCtrl($scope, UserGroupsService) {
+module.exports = function UserGroupsCtrl($scope, $rootScope, UserGroupsService) {
 
-  $scope.userGroups = []
   $scope.maxSafeInteger = Number.MAX_SAFE_INTEGER
 
   function updateUserGroups() {
-    UserGroupsService.getUserGroups()
-      .success(function(response) {
-        $scope.userGroups = response.groups || []
+    UserGroupsService.getUserGroups().success(function(response) {
+      $rootScope.userGroups = response.groups || []
 
-        for (var g = 0; g < $scope.userGroups.length; g++) {
-          var group = $scope.userGroups[g]
-          group.users = []
-          for (var d = 0; d < group.userEmails.length; d++) {
-            var email = group.userEmails[d]
-            insertDeviceBySerial(email, group)
-          }
-        }
+      $rootScope.userGroups.forEach(function(uGroup) {
+        uGroup.users = []
+        uGroup.userEmails.forEach(function(email) {
+          insertDeviceBySerial(email, uGroup)
+        })
       })
+    })
   }
 
   function insertDeviceBySerial(email, group) {

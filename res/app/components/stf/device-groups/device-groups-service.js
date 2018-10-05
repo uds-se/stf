@@ -121,15 +121,15 @@ module.exports = function DeviceGroupsServiceFactory(
 
   //------------ Associated user groups
 
-  function loadUserGroups() {
-    var xmlHttp = new XMLHttpRequest()
-    xmlHttp.open('GET', '/api/v1/groups/users/', false) // false for synchronous request
-    xmlHttp.send(null)
-    $rootScope.userGroups = angular.fromJson(xmlHttp.responseText).groups
-  }
+  // function loadUserGroups() {
+  //   var xmlHttp = new XMLHttpRequest()
+  //   xmlHttp.open('GET', '/api/v1/groups/users/', false) // false for synchronous request
+  //   xmlHttp.send(null)
+  //   $rootScope.userGroups = angular.fromJson(xmlHttp.responseText).groups
+  // }
 
-  DeviceGroupsService.getFilteredAssociatedUserGroups = function(group) {
-    if (group.userGroupTitles.length === 0) {
+  DeviceGroupsService.getFilteredAssociatedUserGroups = function(dGroup) {
+    if (dGroup.userGroupTitles.length === 0) {
       return $rootScope.userGroups
     }
 
@@ -138,12 +138,11 @@ module.exports = function DeviceGroupsServiceFactory(
     // contained inside the group
     let filteredUserGroups = []
 
-    for (var i = 0; i < $rootScope.userGroups.length; i++) {
-      var ugroup = $rootScope.userGroups[i]
-      if (group.userGroupTitles.indexOf(ugroup.title) === -1) {
+    $rootScope.userGroups.forEach(function(ugroup) {
+      if (dGroup.userGroupTitles.indexOf(ugroup.title) === -1) {
         filteredUserGroups.push(ugroup)
       }
-    }
+    })
 
     return filteredUserGroups
   }
@@ -172,7 +171,8 @@ module.exports = function DeviceGroupsServiceFactory(
 
   function loadData() {
     loadDevices()
-    loadUserGroups()
+    // Load user groups in UserGroupsCtrl and not in advance
+    // loadUserGroups()
   }
 
   // At fist load all devices and user groups, then return the service

@@ -3,19 +3,15 @@ module.exports = function DeviceGroupsCtrl($scope, DeviceGroupsService) {
   $scope.deviceGroups = []
 
   function updateDeviceGroups() {
-    DeviceGroupsService.getDeviceGroups()
-      .success(function(response) {
-        $scope.deviceGroups = response.groups || []
-
-        for (var g = 0; g < $scope.deviceGroups.length; g++) {
-          var group = $scope.deviceGroups[g]
-          group.devices = []
-          for (var d = 0; d < group.deviceSerials.length; d++) {
-            var deviceSerial = group.deviceSerials[d]
-            insertDeviceBySerial(deviceSerial, group)
-          }
-        }
+    DeviceGroupsService.getDeviceGroups().success(function(response) {
+      $scope.deviceGroups = response.groups || []
+      $scope.deviceGroups.forEach(function(dGroup) {
+        dGroup.devices = []
+        dGroup.deviceSerials.forEach(function(deviceSerial) {
+          insertDeviceBySerial(deviceSerial, dGroup)
+        })
       })
+    })
   }
 
   function insertDeviceBySerial(deviceSerial, group) {
