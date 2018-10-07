@@ -230,6 +230,7 @@ module.exports = function RunTestCtrl($window, $scope, $rootScope, DeviceService
           $scope.upload.progress = 100
           $scope.upload.state = 'installed'
           $scope.upload.settled = true
+          updateInfoText()
           $scope.$digest()
         })
         .catch(function(err) {
