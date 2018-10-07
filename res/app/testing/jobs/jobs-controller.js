@@ -10,7 +10,7 @@ module.exports = function JobsCtrl($scope, $rootScope, JobsService, ErrorMessage
   }
 
   $scope.getFormattedDate = function(timestamp) {
-    return new Date(timestamp).toString()
+    return new Date(timestamp).toLocaleString()
   }
 
   $scope.getTimeDifference = function(job) {
