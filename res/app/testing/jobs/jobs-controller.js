@@ -15,7 +15,7 @@ module.exports = function JobsCtrl($scope, $rootScope, JobsService, ErrorMessage
 
   $scope.getTimeDifference = function(job) {
     const jobStart = new Date(job.startDate)
-    const jobEndReference = job.status === 'Runs' ? new Date() : new Date(job.finishedDate)
+    const jobEndReference = job.status === 'Running' ? new Date() : new Date(job.finishedDate)
     let timeDiff = jobEndReference.getTime() - jobStart.getTime()
     const ms = timeDiff % 1000
     timeDiff = (timeDiff - ms) / 1000
