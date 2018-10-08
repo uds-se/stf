@@ -156,7 +156,7 @@ module.exports = function RunTestCtrl($window, $scope, $rootScope, DeviceService
   function updateTestingTools() {
     TestingToolsService.getTestingTools().success(function(response) {
       response.testingTools.map(function(config) {
-        // Be aware that there are also additional parameters already
+        // Be aware that there are also setup parameters already
         config.toolParameters = ''
       })
       $scope.configs = response.testingTools

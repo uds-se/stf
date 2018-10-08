@@ -10,14 +10,14 @@ module.exports = function addTestingToolDirective(TestingToolsService) {
     controller: function($scope, TestingToolsService) {
       const gitRepositoryDefault = 'https://github.com/uds-se/droidmate'
       const gitCommitDefault = 'master'
-      const parametersDefault = ''
+      const setupParametersDefault = ''
       const dockerRepositoryDefault = 'https://github.com/uds-se/droidmatedockerenv.git#farmtesting'
 
       $scope.addForm = {
         title: ''
         , gitRepository: gitRepositoryDefault
         , gitCommit: gitCommitDefault
-        , parameters: parametersDefault
+        , setupParameters: setupParametersDefault
         , dockerRepository: dockerRepositoryDefault
       }
 
@@ -36,7 +36,7 @@ module.exports = function addTestingToolDirective(TestingToolsService) {
           title: $scope.addForm.title
           , gitRepository: $scope.addForm.gitRepository
           , gitCommit: $scope.addForm.gitCommit
-          , parameters: $scope.addForm.parameters
+          , setupParameters: $scope.addForm.setupParameters
           , dockerRepository: $scope.addForm.dockerRepository
         })
       }
@@ -45,7 +45,7 @@ module.exports = function addTestingToolDirective(TestingToolsService) {
         $scope.addForm.title = ''
         $scope.addForm.gitRepository = gitRepositoryDefault
         $scope.addForm.gitCommit = gitCommitDefault
-        $scope.addForm.parameters = parametersDefault
+        $scope.addForm.setupParameters = setupParametersDefault
         $scope.addForm.dockerRepository = dockerRepositoryDefault
         $scope.showAdd = false
         $scope.error = ''

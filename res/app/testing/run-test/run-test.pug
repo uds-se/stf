@@ -23,7 +23,7 @@
               th(colspan='1', style='width: 10%')
                 span(translate) Git commit or branch
               th(colspan='1', style='width: 25%')
-                span(translate) Additional parameters
+                span(translate) Setup parameters
               th(colspan='1', style='width: 30%')
                 span(translate) Docker repository
           tbody
@@ -42,7 +42,7 @@
               td
                 span {{config.gitCommit}}
               td
-                span {{config.parameters}}
+                span {{config.setupParameters}}
               td
                 span {{config.dockerRepository}}
 
@@ -95,23 +95,19 @@
                 span Overall number of retries if a test run fails.
 
       .widget-content
-        uib-tabset.overflow-auto
-          uib-tab(ng-if='!noToolSelected()')
-            uib-tab-heading
-              i.fa.fa-cog
-              span(translate) {{configs[configSelected].title}} configuration
-            .widget-content.padded
-              textarea(id='testing-config-tool-parameters',
-                      rows='4',
-                      name='configToolParameters',
-                      placeholder="Note: You should not configure here the output or input directory or device serial number.",
-                      ng-model='configs[configSelected].toolParameters',
-                      ng-required='true',
-                      autocorrect='off',
-                      autocapitalize='off',
-                      spellcheck='false',
-                      focus-element='focusAddKey',
-                      ng-disabled='pressedTest').form-control
+        span Tool parameters
+        textarea(id='testing-config-tool-parameters',
+                rows='4',
+                name='configToolParameters',
+                placeholder="Note: You should not configure here the output or input directory or device serial number.",
+                ng-model='configs[configSelected].toolParameters',
+                ng-required='true',
+                autocorrect='off',
+                autocapitalize='off',
+                spellcheck='false',
+                focus-element='focusAddKey',
+                ng-disabled='pressedTest').form-control
+
         span(ng-if='noToolSelected()') Add a tool to enable configurations
 
     .col-md-6
