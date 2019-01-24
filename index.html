@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en-US"><link type="text/css" id="dark-mode" rel="stylesheet" href=""><style type="text/css" id="dark-mode-custom-style"></style><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="data/style.css">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>stf | Control and manage Android devices from your browser.</title>
+<meta name="generator" content="Jekyll v3.7.4">
+<meta property="og:title" content="stf">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Control and manage Android devices from your browser.">
+<meta property="og:description" content="Control and manage Android devices from your browser.">
+<link rel="canonical" href="https://uds-se.github.io/stf/">
+<meta property="og:url" content="https://uds-se.github.io/stf/">
+<meta property="og:site_name" content="stf">
+<script type="application/ld+json">
+{"@type":"WebSite","url":"https://uds-se.github.io/stf/","headline":"stf","name":"stf","description":"Control and manage Android devices from your browser.","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/uds-se/stf">View on GitHub</a>
+
+          <h1 id="project_title">stf testing</h1>
+          <h2 id="project_tagline">Test on Android devices from your browser.</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><img src="data/STF-128.png" style="width:100px;height:100px;" alt="STF"></p>
+
+<p><strong>STF</strong> (or Smartphone Test Farm) is a web application 
+for debugging smartphones, smartwatches and other gadgets remotely, from
+ the comfort of your browser.</p>
+
+<p>STF was originally developed at <a href="https://www.cyberagent.co.jp/en/">CyberAgent</a> to control a growing collection of more than 160 devices. As of July 2016 development is mainly sponsored by <a href="https://performance.headspin.io/">HeadSpin</a> and <a href="https://www.bountysource.com/teams/openstf">other individual contributors</a>.</p>
+
+<p><img src="data/shelf_closeup_790x.jpg" alt="Close-up of device shelf"></p>
+
+<p><img src="data/7s_usage.gif" alt="Super short screencast showing usage"></p>
+
+<p><img src="data/FarmTesting.gif" alt="Super short testing feature showing usage"></p>
+
+<h2 id="features">Original features</h2>
+
+<ul>
+  <li>OS support
+    <ul>
+      <li>Android
+        <ul>
+          <li>Supports versions 2.3.3 (SDK level 10) to 8.1 (SDK level 27)</li>
+          <li>Supports Wear 5.1 (but not 5.0 due to missing permissions)</li>
+          <li>Supports Fire OS, CyanogenMod, and other heavily Android based distributions</li>
+          <li><code class="highlighter-rouge">root</code> is <strong>not</strong> required for any current functionality</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Remote control any device from your browser
+    <ul>
+      <li>Real-time screen view
+        <ul>
+          <li>Refresh speed can reach 30-40 FPS depending on specs and Android version. See <a href="https://github.com/openstf/minicap">minicap</a> for more information.</li>
+          <li>Rotation support</li>
+        </ul>
+      </li>
+      <li>Supports typing text from your own keyboard
+        <ul>
+          <li>Supports meta keys</li>
+          <li>Copy and paste support (although it can be a bit finicky on older devices, you may need to long-press and select paste manually)</li>
+          <li>May sometimes not work well with non-Latin languages unfortunately.</li>
+        </ul>
+      </li>
+      <li>Multitouch support on touch screens via <a href="https://github.com/openstf/minitouch">minitouch</a>, two finger pinch/rotate/zoom gesture support on regular screens by pressing <code class="highlighter-rouge">Alt</code> while dragging</li>
+      <li>Drag &amp; drop installation and launching of <code class="highlighter-rouge">.apk</code> files
+        <ul>
+          <li>Launches main launcher activity if specified in the manifest</li>
+        </ul>
+      </li>
+      <li>Reverse port forwarding via <a href="https://github.com/openstf/minirev">minirev</a>
+        <ul>
+          <li>Access your local server directly from the device, even if it’s not on the same network</li>
+        </ul>
+      </li>
+      <li>Open websites easily in any browser
+        <ul>
+          <li>Installed browsers are detected in real time and shown as selectable options</li>
+          <li>Default browser is detected automatically if selected by the user</li>
+        </ul>
+      </li>
+      <li>Execute shell commands and see real-time output</li>
+      <li>Display and filter device logs</li>
+      <li>Use <code class="highlighter-rouge">adb connect</code> to connect to a remote device as if it was plugged in to your computer, regardless of <a href="http://developer.android.com/tools/help/adb.html">ADB</a> mode and whether you’re connected to the same network
+        <ul>
+          <li>Run any <code class="highlighter-rouge">adb</code> command locally, including shell access</li>
+          <li><a href="http://developer.android.com/tools/studio/index.html">Android Studio</a> and other IDE support, debug your app while watching the device screen on your browser</li>
+          <li>Supports <a href="https://developer.chrome.com/devtools/docs/remote-debugging">Chrome remote debug tools</a></li>
+        </ul>
+      </li>
+      <li>File Explorer to access device file system</li>
+      <li>Experimental VNC support (work in progress)</li>
+    </ul>
+  </li>
+  <li>Manage your device inventory
+    <ul>
+      <li>See which devices are connected, offline/unavailable (indicating a weak USB connection), unauthorized or unplugged</li>
+      <li>See who’s using a device</li>
+      <li>Search devices by phone number, IMEI, ICCID, Android version, 
+operator, product name and/or many other attributes with easy but 
+powerful queries</li>
+      <li>Show a bright red screen with identifying information on a device you need to locate physically</li>
+      <li>Track battery level and health</li>
+      <li>Rudimentary Play Store account management
+        <ul>
+          <li>List, remove and add new accounts (adding may not work on all devices)</li>
+        </ul>
+      </li>
+      <li>Display hardware specs</li>
+    </ul>
+  </li>
+  <li>Simple REST <a href="https://uds-se.github.io/stf/doc/API.html">API</a></li>
+</ul>
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        
+        <p class="copyright">stf maintained by <a href="https://github.com/uds-se">uds-se</a></p>
+        
+        <p>Published with <a href="https://pages.github.com/">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+</body></html>
