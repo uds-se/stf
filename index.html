@@ -46,7 +46,9 @@ for debugging smartphones, smartwatches and other gadgets remotely, from
 
 <p>STF was originally developed at <a href="https://www.cyberagent.co.jp/en/">CyberAgent</a> to control a growing collection of more than 160 devices. As of July 2016 development is mainly sponsored by <a href="https://performance.headspin.io/">HeadSpin</a> and <a href="https://www.bountysource.com/teams/openstf">other individual contributors</a>.</p>
 
-<p>The online demo is <a href="https://uds-se.github.io/stf/">here</a> available.</p>
+<p><strong>STF</strong> testing is an extension of the original STF application and was developed at the <a href="https://www.st.cs.uni-saarland.de/">Software Engineering Chair</a>.</p>
+
+<p>The online demo is <a href="https://uds-se.github.io/stf/">here</a> available. For technical details have a look at our <a href="https://github.com/uds-se/stf/wiki/">Wiki</a>.</p>
 
 <div class="alert alert-info">
   <strong>Note:</strong> For legal and security reasons the actual execution of Docker container is disabled and there are no physical devices connected,
@@ -55,9 +57,32 @@ for debugging smartphones, smartwatches and other gadgets remotely, from
 
 <p><img src="data/shelf_closeup_790x.jpg" alt="Close-up of device shelf"></p>
 
-<h2 id="features">Newly introduced features</h2>
+<h2 id="features">STF testing features</h2>
 
 <p><img src="data/FarmTesting.gif" alt="Super short testing feature showing usage"></p>
+
+<p><img src="data/UserAndDeviceManagement.png" alt="Demo for the advanced user and device management"></p>
+
+<ul>
+  <li>Advanced Testing Facilities
+    <ul>
+      <li>Configure arbitrary testing setups to test <code class="highlighter-rouge">.apk</code> files</li>
+      <li>Select from the set of available physical devices</li>
+      <li>Configure and spawn emulators with arbitrary configuration</li>
+      <li>Run test jobs using the testing configuration</li>
+      <li>The testing takes place in Docker containers to leverage advantages of containerization like better resource management, repeatability and isolated testing environments</li>
+      <li>The tool takes care of the communication from within Docker containers and physical and emulated devices</li>
+      <li>Real-time feedback of the executing tests</li>
+    </ul>
+  </li>
+  <li>Advanced User And Device Management 
+    <ul>
+      <li>Extension of the very simple existing user and device management</li>
+      <li>Users and devices can be managed in groups</li>
+      <li>A limit of actively used devices per user group can be set</li>
+    </ul>
+  </li>
+</ul>
 
 <h2 id="features">Original features</h2>
 
