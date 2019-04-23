@@ -5,11 +5,7 @@ FROM ubuntu:latest
 #ENV PATH /app/bin:$PATH
 ENV REPO="https://github.com/uds-se/stf.git"
 
-# Work in app dir by default.
-#WORKDIR /app
-
-# Export default app port, not enough for all processes but it should do
-# for now.
+# Export default app port
 EXPOSE 3000
 EXPOSE 8080
 EXPOSE 7100
@@ -30,7 +26,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 
 # Install rethinkdb
 RUN wget -q -O foo.deb https://github.com/srh/rethinkdb/releases/download/v2.3.6.srh.1/rethinkdb_2.3.6.srh.1.0bionic_amd64.deb && \
-    dpkg -i foo.deb || apt-get install -y -f && \
+    dpkg -i foo.deb || apt-get install -qqy -f && \
     rethinkdb --version
 
 # Install Docker
