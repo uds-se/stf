@@ -53,18 +53,17 @@ RUN /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js instal
 RUN git clone ${REPO} stf && \
     cd stf && \
     git fetch && \
-    git checkout OSTF-DEMO && \
-    git pull
+    git checkout OSTF-DEMO
 
 WORKDIR stf
 RUN npm install --unsafe --quiet -g stf && \
     npm install --unsafe --quiet && \
     npm link && \
     npm prune --production && \
-    npm cache clean
-RUN rm -rf ~/.node-gyp
+    npm cache clean && \
+    rm -rf ~/.node-gyp
 
-RUN chmod +x ./dockerDemo/start.sh
-RUN chmod +x ./dockerDemo/startFarm.sh
+RUN chmod +x ./dockerDemo/start.sh && \
+    chmod +x ./dockerDemo/startFarm.sh
 
 ENTRYPOINT ["./dockerDemo/startFarm.sh"]
