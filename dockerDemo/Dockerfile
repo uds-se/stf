@@ -65,7 +65,9 @@ RUN git clone ${REPO} stf && \
 #    rm -rf /tmp/*
 
 WORKDIR stf
-RUN npm link && \
+RUN npm install -g stf && \
+    npm install && \
+    npm link && \
     npm prune --production && \
     npm cache clean
 RUN rm -rf ~/.node-gyp
