@@ -1,4 +1,5 @@
-FROM ubuntu:16.04
+#FROM ubuntu:16.04
+FROM ubuntu:latest
 
 # Sneak the stf executable into $PATH.
 #ENV PATH /app/bin:$PATH
@@ -27,8 +28,13 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     tar -xJf node-v*.tar.xz --strip-components 1 -C /usr/local && \
     rm node-v*.tar.xz
 
+# Install rethinkdb
+RUN wget -O foo.deb https://github.com/srh/rethinkdb/releases/download/v2.3.6.srh.1/rethinkdb_2.3.6.srh.1.0bionic_amd64.deb
+RUN dpkg -i foo.deb || apt-get install -y -f
+RUN rethinkdb --version
+
 RUN /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js install && \
-    apt-get -y install libzmq3-dev libprotobuf-dev git graphicsmagick yasm && \
+    apt-get -y install libzmq3-dev libprotobuf-dev graphicsmagick yasm && \
     apt-get clean && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
@@ -37,7 +43,7 @@ RUN /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js instal
 RUN git clone ${REPO} stf && \
     cd stf && \
     git fetch && \
-    git checkout OSTF-20_PR
+    git checkout OSTF-DEMO
 
 # Give permissions to our build user.
 #RUN mkdir -p /app && \
@@ -58,10 +64,13 @@ RUN git clone ${REPO} stf && \
 #    cd /app && \
 #    rm -rf /tmp/*
 
-RUN npm link
+WORKDIR stf
+RUN npm link && \
+    npm prune --production && \
+    npm cache clean
+RUN rm -rf ~/.node-gyp
 
-RUN chmod +x ./start.sh
-RUN chmod +x ./startFarm.sh
+RUN chmod +x ./dockerDemo/start.sh
+RUN chmod +x ./dockerDemo/startFarm.sh
 
-# Show help by default.
-ENTRYPOINT ["./startFarm.sh"]
+ENTRYPOINT ["./dockerDemo/startFarm.sh"]
