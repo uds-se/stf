@@ -41,7 +41,8 @@ RUN apt-get -qqy install apt-transport-https \
       $(lsb_release -cs) \
       stable" && \
    apt-get update -qq && \
-   apt-get -y install docker-ce
+   apt-get -qqy install docker-ce && \
+   docker --version
 
 RUN /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js install && \
     apt-get -qqy install libzmq3-dev libprotobuf-dev graphicsmagick yasm && \
@@ -56,8 +57,8 @@ RUN git clone ${REPO} stf && \
     git pull
 
 WORKDIR stf
-RUN npm install -g stf && \
-    npm install && \
+RUN npm install --unsafe --quiet -g stf && \
+    npm install --unsafe --quiet && \
     npm link && \
     npm prune --production && \
     npm cache clean
