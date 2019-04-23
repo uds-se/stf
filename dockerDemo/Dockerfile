@@ -20,8 +20,8 @@ EXPOSE 7100
 # wait for them on the first native module installation.
 RUN export DEBIAN_FRONTEND=noninteractive && \
     sed -i'' 's@http://archive.ubuntu.com/ubuntu/@mirror://mirrors.ubuntu.com/mirrors.txt@' /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get -y install wget python build-essential git-all git && \
+    apt-get update -qq && \
+    apt-get -qqy install wget python build-essential git && \
     cd /tmp && \
     wget --progress=dot:mega \
       https://nodejs.org/dist/v6.11.2/node-v6.11.2-linux-x64.tar.xz && \
@@ -29,13 +29,27 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm node-v*.tar.xz
 
 # Install rethinkdb
-RUN wget -O foo.deb https://github.com/srh/rethinkdb/releases/download/v2.3.6.srh.1/rethinkdb_2.3.6.srh.1.0bionic_amd64.deb
-RUN dpkg -i foo.deb || apt-get install -y -f
-RUN rethinkdb --version
+RUN wget -O foo.deb https://github.com/srh/rethinkdb/releases/download/v2.3.6.srh.1/rethinkdb_2.3.6.srh.1.0bionic_amd64.deb && \
+    dpkg -i foo.deb || apt-get install -y -f && \
+    rethinkdb --version
+
+# Install Docker
+RUN apt-get -qqy install apt-transport-https \
+      ca-certificates \
+      curl \
+      gnupg2 \
+      software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+    add-apt-repository \
+      "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+      $(lsb_release -cs) \
+      stable" && \
+   apt-get update -qq && \
+   apt-get -y install docker-ce
 
 RUN /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js install && \
-    apt-get -y install libzmq3-dev libprotobuf-dev graphicsmagick yasm && \
-    apt-get clean && \
+    apt-get -qqy install libzmq3-dev libprotobuf-dev graphicsmagick yasm && \
+    apt-get clean -qq && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
 # Copy app source.
