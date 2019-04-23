@@ -29,7 +29,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm node-v*.tar.xz
 
 # Install rethinkdb
-RUN wget -O foo.deb https://github.com/srh/rethinkdb/releases/download/v2.3.6.srh.1/rethinkdb_2.3.6.srh.1.0bionic_amd64.deb && \
+RUN wget -q -O foo.deb https://github.com/srh/rethinkdb/releases/download/v2.3.6.srh.1/rethinkdb_2.3.6.srh.1.0bionic_amd64.deb && \
     dpkg -i foo.deb || apt-get install -y -f && \
     rethinkdb --version
 
@@ -52,31 +52,12 @@ RUN /usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js instal
     apt-get clean -qq && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/*
 
-# Copy app source.
-#COPY . /tmp/build/
+# Clone app source
 RUN git clone ${REPO} stf && \
     cd stf && \
     git fetch && \
-    git checkout OSTF-DEMO
-
-# Give permissions to our build user.
-#RUN mkdir -p /app && \
-#    chown -R stf-build:stf-build /tmp/build /app
-
-# Run the build.
-#RUN set -x && \
-#    cd /tmp/build && \
-#    export PATH=$PWD/node_modules/.bin:$PATH && \
-#    npm install --loglevel http && \
-#    npm pack && \
-#    tar xzf stf-*.tgz --strip-components 1 -C /app && \
-#    bower cache clean && \
-#    npm prune --production && \
-#    mv node_modules /app && \
-#    npm cache clean && \
-#    rm -rf ~/.node-gyp && \
-#    cd /app && \
-#    rm -rf /tmp/*
+    git checkout OSTF-DEMO && \
+    git pull
 
 WORKDIR stf
 RUN npm install -g stf && \
